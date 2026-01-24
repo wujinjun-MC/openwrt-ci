@@ -201,6 +201,10 @@ jobs:
       run: |
         cd $OPENWRT_PATH/bin/targets/*/*
         cat sha256sums
+        # 提取 Commit 信息
+        echo "COMMIT_HASH=$(cd $OPENWRT_PATH && git rev-parse HEAD)" >> $GITHUB_ENV
+        echo "SHORT_COMMIT=$(cd $OPENWRT_PATH && git rev-parse --short HEAD)" >> $GITHUB_ENV
+        
         echo "VERSION_KERNEL=$(find -type f -name "*.manifest" -exec grep -oP '^kernel - \K.*?(?=~|-\d+-)' {} \;)" >> $GITHUB_ENV
         cp $OPENWRT_PATH/.config build.config
         mv -f $OPENWRT_PATH/bin/packages/*/*/*.apk packages
@@ -221,16 +225,17 @@ jobs:
       with:
         name: R${{ env.DATE }} for ${{ env.FIRMWARE_TAG }}
         allowUpdates: true
-        tag: ${{ env.FIRMWARE_TAG }}
+        tag: ${{ env.FIRMWARE_TAG }} # 使用带日期的时间戳 Tag
         token: ${{ secrets.GITHUB_TOKEN }}
         artifacts: ${{ env.FIRMWARE_PATH }}/*
         body: |
-          **This is OpenWrt Firmware for (Redmi-AX5-JDC)**
+          **This is OpenWrt Firmware for (IPQ60XX-AX5-JDC-6.12-WIFI)**
           ### 📒 固件信息(WIFI)
           - 带WIFI带有线NSS的6.12内核固件
-          - 💻 这是 (红米AX5-JDC) 平台使用的 OpenWrt 固件
+          - 💻 这是 (IPQ60XX-AX5-JDC-6.12-WIFI) 平台使用的 OpenWrt 固件
           - ⚽ 固件源码: ${{ env.REPO_URL }}
           - 💝 源码分支: ${{ env.REPO_BRANCH }}
+          - 🔗 源码版本: [${{ env.SHORT_COMMIT }}](${{ env.REPO_URL }}/commit/${{ env.COMMIT_HASH }})
           - 🌐 默认地址: 192.168.4.1
           - 🔑 默认密码: password
           ### 🧊 固件版本
@@ -274,7 +279,7 @@ jobs:
         while true; do
           CURRENT_TIME=$(date +%s)
           ELAPSED=$(( CURRENT_TIME - TIMESTAMP_START ))
-          echo "当前剩余时间: ${ELAPSED}s"
+          echo "当前消耗时间: ${ELAPSED}s"
           
           # 检查 1: 标志文件是否被删除
           if [ ! -f "$FLAG_FILE" ]; then
@@ -290,7 +295,7 @@ jobs:
           
           # 检查 3: 是否接近 6 小时运行上限
           if [ $ELAPSED -gt $MAX_RUNTIME ]; then
-            echo "已达到最大运行时间，正在自动退出..."
+            echo "接近 Action 运行限时，正在自动退出..."
             break
           fi
           
