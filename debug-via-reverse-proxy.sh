@@ -17,9 +17,6 @@ echo "Pleased wait and check tcp tunnel on your dashboard at https://dashboard.c
 cpolar tcp 22 -daemon on -log /tmp/cpolar.log -log-level INFO &# tail -F ~/test.log &
 echo "Write your release notes at /workdir/openwrt/custom_release_notes.txt"
 echo "echo Write your release notes at /workdir/openwrt/custom_release_notes.txt" >> ~/.bash_profile
-echo "Enter source code directory ~/work/openwrt-ax5-jdc/openwrt-ax5-jdc/openwrt"
-echo "echo Enter source code directory ~/work/openwrt-ax5-jdc/openwrt-ax5-jdc/openwrt" >> ~/.bash_profile
-echo "cd ~/work/openwrt-ax5-jdc/openwrt-ax5-jdc/openwrt" >> ~/.bash_profile
 sleep 10
 if [ "$1"x != "nonblock"x ]
 then
@@ -46,3 +43,24 @@ then
         sleep 10
     done
 fi
+
+echo "Enter source code directory: cd ~/work/openwrt-ax5-jdc/openwrt-ax5-jdc/openwrt"
+
+# 定义目标源码路径 (根据你提供的容器路径)
+TARGET_PATH="/home/runner/work/openwrt-ax5-jdc/openwrt-ax5-jdc/openwrt"
+
+# 写入自动化逻辑到 .bash_profile
+cat << 'EOF' >> ~/.bash_profile
+# 检查是否在 Remote 会话中，且当前目录是家目录
+if [ -n "$SSH_CONNECTION" ] || [ -n "$SSH_CLIENT" ]; then
+    if [ "$PWD" = "$HOME" ]; then
+        # 这里的路径会自动替换为上面定义的变量值
+        SOURCE_DIR="/home/runner/work/openwrt-ax5-jdc/openwrt-ax5-jdc/openwrt"
+        if [ -d "$SOURCE_DIR" ]; then
+            cd "$SOURCE_DIR"
+            echo -e "\033[32m[Cpolar Debug] 已自动跳转至源码目录: $SOURCE_DIR\033[0m"
+            echo -e "\033[33m提示: 输入 'make menuconfig' 进行配置，完成后输入 'rm /tmp/keep-term' 退出\033[0m"
+        fi
+    fi
+fi
+EOF
