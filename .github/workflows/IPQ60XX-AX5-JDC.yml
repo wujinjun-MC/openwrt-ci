@@ -153,6 +153,11 @@ jobs:
         cd $OPENWRT_PATH
         $GITHUB_WORKSPACE/$DIY_SCRIPT
 
+    - name: Load Custom Overwrite(加载自定义覆写)
+      run: |
+        chmod +x $GITHUB_WORKSPACE/overwrite/overwrite-after-feeds-download.sh
+        $GITHUB_WORKSPACE/overwrite/overwrite-after-feeds-download.sh
+
     # 2. 核心步骤：在编译前进入交互式 menuconfig
     - name: Remote make menuconfig
       if: env.CPOLAR == 'mkconf'
