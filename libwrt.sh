@@ -17,3 +17,6 @@ git clone --depth=1 https://github.com/animegasan/luci-app-quickstart package/lu
 
 # AdGuard Home
 git clone --depth=1 https://github.com/rufengsuixing/luci-app-adguardhome package/luci-app-adguardhome
+
+# Tailscale (community)
+git clone --depth=1 https://github.com/tokisaki-galaxy/luci-app-tailscale-community package/luci-app-tailscale-community
