@@ -36,9 +36,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@main
-
     # 1. 在初始化环境前，如果选择了 debug 模式，先启动隧道（非阻塞模式）
     - name: Remote debug (Startup)
       if: env.CPOLAR == 'debug'
@@ -78,6 +75,9 @@ jobs:
         swap-size-mb: 1024
         temp-reserve-mb: 100
         root-reserve-mb: 1024
+
+    - name: Checkout
+      uses: actions/checkout@main
 
     - name: Print disk usage 1
       if: always()
