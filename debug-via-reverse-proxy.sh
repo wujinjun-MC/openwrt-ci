@@ -44,10 +44,10 @@ then
     done
 fi
 
-echo "Enter source code directory: cd ~/work/openwrt-ax5-jdc/openwrt-ax5-jdc/openwrt"
 
 # 定义目标源码路径 (根据你提供的容器路径)
 TARGET_PATH="/home/runner/work/openwrt-ax5-jdc/openwrt-ax5-jdc/openwrt"
+echo "Enter source code directory: $TARGET_PATH"
 
 # 写入自动化逻辑到 .bash_profile
 cat << 'EOF' >> ~/.bash_profile
@@ -63,4 +63,16 @@ if [ -n "$SSH_CONNECTION" ] || [ -n "$SSH_CLIENT" ]; then
         fi
     fi
 fi
+EOF
+
+# 一键进入 menuconfig
+cat << 'EOF' >> ~/.bash_profile
+enter_menuconfig() {
+    local target="/home/runner/work/openwrt-ax5-jdc/openwrt-ax5-jdc/openwrt"
+    cd "$target"
+    tmux new-session -A -s config "make menuconfig"
+}
+
+# 执行函数
+#enter_menuconfig
 EOF
