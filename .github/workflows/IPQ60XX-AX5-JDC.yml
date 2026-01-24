@@ -36,6 +36,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Record Startup Timestamp(记录启动时间戳)
+      run: |
+        sudo timedatectl set-timezone "$TZ"
+        printf "TIMESTAMP_START=%(%s)T" >> $GITHUB_ENV
+
     # 1. 在初始化环境前，如果选择了 debug 模式，先启动隧道（非阻塞模式）
     - name: Remote debug (Startup)
       if: env.CPOLAR == 'debug'
@@ -249,26 +254,27 @@ jobs:
         # printf "TIMESTAMP_AFTER_PACKAGING=%(%s)T" > $GITHUB_ENV
         # ( pgrep cpolar && [ $(( TIMESTAMP_AFTER_PACKAGING - TIMESTAMP_AFTER_COMPILE )) -lt 21500 ] ) || exit 0
         # sleep $(( 21550 - $(( TIMESTAMP_AFTER_PACKAGING - TIMESTAMP_AFTER_COMPILE )) ))
+        
         # 设置结束时间戳（约 6 小时超时限制）
         # GitHub Actions 单个 Job 限制为 360 分钟 (21600秒)
+        sudo timedatectl set-timezone "$TZ"
         MAX_RUNTIME=21500
-        START_TIME=${{ env.TIMESTAMP_ON_STARTUP }}
+        printf "TIMESTAMP_STOP=%(%s)T" >> $GITHUB_ENV
         FLAG_FILE="/tmp/keep-cpolar"
 
         echo "========================================================="
+        echo "所有运行已结束，用时 $(( TIMESTAMP_STOP - TIMESTAMP_START )) 秒"
         echo "远程调试保持中..."
-        echo "退出方式: 1. SSH输入 'rm $FLAG_FILE' | 2. 终止 cpolar 进程"
+        echo "退出方式: 1. SSH输入 'rm $FLAG_FILE' | 2. 终止 cpolar 进程 | 3. 接近 Action 时间限制"
         echo "========================================================="
 
         # 创建标志文件（如果不存在）
         touch "$FLAG_FILE"
         
-        echo "Cpolar 保持运行中... [监控中]"
-        echo "退出条件: 1. 手动删除 $FLAG_FILE  2. cpolar 进程结束  3. 接近 Action 时间限制"
-        
         while true; do
           CURRENT_TIME=$(date +%s)
-          ELAPSED=$(( CURRENT_TIME - START_TIME ))
+          ELAPSED=$(( CURRENT_TIME - TIMESTAMP_START ))
+          echo "当前剩余时间: ${ELAPSED}s"
           
           # 检查 1: 标志文件是否被删除
           if [ ! -f "$FLAG_FILE" ]; then
