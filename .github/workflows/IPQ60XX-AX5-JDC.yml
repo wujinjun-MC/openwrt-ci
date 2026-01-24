@@ -2,6 +2,16 @@ name: IPQ60XX-AX5-JDC-6.12
 
 on:
   workflow_dispatch:
+    # 增加交互式开关，方便在启动时选择是否进入调试模式
+    inputs:
+      debug_or_make_config:
+        description: "是否开启远程调试 (cpolar)"
+        default: "none"
+        type: choice
+        options:
+          - none
+          - debug
+          - mkconf
   schedule:
     - cron: 0 19 * * 5
 
@@ -16,12 +26,25 @@ env:
   FIRMWARE_RELEASE: true
   FIRMWARE_TAG: IPQ60XX-AX5-JDC-6.12
   TZ: Asia/Shanghai
+  # --- 注入 Cpolar 所需的环境变量 ---
+  MY_SSH_PUB_KEY: ${{ secrets.SSH_PUBLIC_KEY }}
+  MY_REVERSE_PROXY_TOKEN: ${{ secrets.REVERSE_PROXY_TOKEN }}
+  CPOLAR: ${{ inputs.debug_or_make_config || 'none' }}
 
 jobs:
   Build:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Checkout
+      uses: actions/checkout@main
+
+    # 1. 在初始化环境前，如果选择了 debug 模式，先启动隧道（非阻塞模式）
+    - name: Remote debug (Startup)
+      if: env.CPOLAR == 'debug'
+      shell: bash
+      run: bash ${GITHUB_WORKSPACE}/debug-via-reverse-proxy.sh nonblock
+
     - name: Check Server Performance(检查服务器性能)
       run: |
         echo "警告⚠"
@@ -56,8 +79,10 @@ jobs:
         temp-reserve-mb: 100
         root-reserve-mb: 1024
 
-    - name: Checkout
-      uses: actions/checkout@main
+    - name: Print disk usage 1
+      if: always()
+      run: |
+        df -h
 
     - name: Clone Source Code(克隆源代码)
       run: |
@@ -97,7 +122,12 @@ jobs:
         mv package/new/custom/speedtest-cli package/new
         rm -rf package/new/custom
         ./scripts/feeds install -a
-  
+
+    - name: Print disk usage 2
+      if: always()
+      run: |
+        df -h
+
     - name: Load Custom Configuration(加载自定义配置)
       run: |
         [ -e files ] && mv files $OPENWRT_PATH/files
@@ -106,6 +136,15 @@ jobs:
         cd $OPENWRT_PATH
         $GITHUB_WORKSPACE/$DIY_SCRIPT
 
+    # 2. 核心步骤：在编译前进入交互式 menuconfig
+    - name: Remote make menuconfig
+      if: env.CPOLAR == 'mkconf'
+      shell: bash
+      run: |
+        # 此时 cpolar 会启动并进入阻塞状态，直到你手动删除 /tmp/keep-term
+        # 你可以在 SSH 终端里执行 cd $OPENWRT_PATH && make menuconfig
+        bash ${GITHUB_WORKSPACE}/debug-via-reverse-proxy.sh
+
     - name: Download DL Package(下载DL软件包)
       run: |
         cd $OPENWRT_PATH
@@ -113,6 +152,11 @@ jobs:
         make download -j8
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
+
+    - name: Print disk usage 3
+      if: always()
+      run: |
+        df -h
 
     - name: Compile Firmware(开始编译固件)
       id: compile
@@ -176,3 +220,17 @@ jobs:
           - 固件内核版本：${{ env.VERSION_KERNEL }}
           - 固件编译前最后一次➦[主源码](${{ env.REPO_URL }})更新记录
           - ${{ env.VERSION_INFO }}
+
+    - name: Print disk usage 4
+      if: always()
+      run: |
+        df -h
+
+    # 3. 编译完成后，如果是 debug 模式，等待一段时间避免立即关机
+    - name: Wait for Remote Debug Exit
+      if: env.CPOLAR != 'none' && !cancelled()
+      shell: bash
+      run: |
+        # 防止编译报错后立即销毁虚拟机，给你留出上去排查日志的时间
+        echo "Cpolar is running, waiting for timeout or manual exit..."
+        sleep 600 
