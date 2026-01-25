@@ -9,10 +9,20 @@ then
 fi
 mkdir -p ~/.ssh
 echo "$MY_SSH_PUB_KEY" >> ~/.ssh/authorized_keys
+
 echo "Starting tunnel..."
 env > ~/current_env.txt
-cpolar authtoken "$MY_REVERSE_PROXY_TOKEN"
+
+if [ "$CPOLAR_TOKEN_TYPE"x = "TOKEN_1"x ]
+    cpolar authtoken "$CPOLAR_TOKEN_1"
+elif [ "$CPOLAR_TOKEN_TYPE"x = "TOKEN_2"x ]
+    cpolar authtoken "$CPOLAR_TOKEN_2"
+else
+    cpolar authtoken "$CPOLAR_TOKEN_1"
+fi
+
 echo "Pleased wait and check tcp tunnel on your dashboard at https://dashboard.cpolar.com/status"
+
 # echo "Remove /tmp/keep-term to continue"
 cpolar tcp 22 -daemon on -log /tmp/cpolar.log -log-level INFO &# tail -F ~/test.log &
 echo "$OPENWRT_PATH/custom_release_notes.txt 写你的自定义发布说明"
