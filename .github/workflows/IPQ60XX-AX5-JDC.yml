@@ -218,8 +218,8 @@ jobs:
         path: ${{ env.OPENWRT_PATH }}/.config
 
     - name: Compile Firmware (多线程尝试)
-      if: inputs.force_single_thread == 'false'
       id: compile
+      if: inputs.force_single_thread == 'false'
       continue-on-error: true # 允许此步失败，以便触发下方的重试逻辑
       run: |
         cd $OPENWRT_PATH
@@ -233,12 +233,22 @@ jobs:
         echo "FILE_DATE=$(date +"%Y.%m.%d")" >> $GITHUB_ENV
 
     - name: Compile Firmware Single Thread with Verbosity (单线程详细模式)
+      id: compile_j1  
       if: ${{ steps.compile.outputs.status != 'success' || inputs.force_single_thread }}
       run: |
         cd $OPENWRT_PATH
         echo "多线程编译失败，正在切换至单线程详细模式 (V=s) 以获取错误日志..."
         # 单线程编译，V=s 会打印所有错误输出
-        make -j1 V=s
+        echo "compile=true" >> $GITHUB_OUTPUT
+        make -j1 V=s | tee -a "$OPENWRT_PATH/build-single-thread.log"
+
+    - name: Upload Single Thread Compile Log to Artifact (备份单线程编译日志到Artifact)
+      if: steps.compile_j1.outputs.compile == 'true'
+      uses: actions/upload-artifact@main
+      with:
+        name: compile-j1-log-${{ env.FIRMWARE_TAG }}.log
+        include-hidden-files: true
+        path: ${{ env.OPENWRT_PATH }}/build-single-thread.log
 
     - name: Check Space Usage(检查空间使用情况)
       if: (!cancelled())
