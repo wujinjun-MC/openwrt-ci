@@ -218,6 +218,7 @@ jobs:
         path: ${{ env.OPENWRT_PATH }}/.config
 
     - name: Compile Firmware (多线程尝试)
+      if: inputs.force_single_thread == 'false'
       id: compile
       continue-on-error: true # 允许此步失败，以便触发下方的重试逻辑
       run: |
@@ -231,8 +232,8 @@ jobs:
         echo "DATE=$(date +"%Y-%m-%d %H:%M:%S")" >> $GITHUB_ENV
         echo "FILE_DATE=$(date +"%Y.%m.%d")" >> $GITHUB_ENV
 
-    - name: Re-compile on Failure (失败后单线程详细模式)
-      if: steps.compile.outputs.status != 'success'
+    - name: Compile Firmware Single Thread with Verbosity (单线程详细模式)
+      if: ${{ steps.compile.outputs.status != 'success' || inputs.force_single_thread }}
       run: |
         cd $OPENWRT_PATH
         echo "多线程编译失败，正在切换至单线程详细模式 (V=s) 以获取错误日志..."
