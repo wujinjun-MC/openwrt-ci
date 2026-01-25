@@ -39,5 +39,6 @@ RUN chmod -R 777 /home/build
 USER build
 WORKDIR /home/build
 
+STOPSIGNAL SIGKILL
 # 进入shell，开始自定义
 CMD ["/bin/bash"]
