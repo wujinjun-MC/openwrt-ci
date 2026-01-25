@@ -20,6 +20,7 @@ RUN sed -i 's|http://archive.ubuntu.com/ubuntu/|http://mirrors.tuna.tsinghua.edu
 RUN sed -i 's|http://security.ubuntu.com/ubuntu/|http://mirrors.tuna.tsinghua.edu.cn/ubuntu/|g' /etc/apt/sources.list /etc/apt/sources.list.d/ubuntu.sources 2>/dev/null || true
 
 # 安装基础编译依赖
+RUN apt-get update && apt-get full-upgrade -y && apt-get install sudo
 RUN bash -c 'bash <(curl -sL https://build-scripts.immortalwrt.org/init_build_environment.sh)'
 RUN sudo -E apt -yqq install dos2unix libfuse-dev
 RUN apt -yqq autoremove --purge && apt -yqq autoclean && apt -yqq clean
