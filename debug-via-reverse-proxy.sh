@@ -14,8 +14,10 @@ echo "Starting tunnel..."
 env > ~/current_env.txt
 
 if [ "$CPOLAR_TOKEN_TYPE"x = "TOKEN_1"x ]
+then
     cpolar authtoken "$CPOLAR_TOKEN_1"
 elif [ "$CPOLAR_TOKEN_TYPE"x = "TOKEN_2"x ]
+then
     cpolar authtoken "$CPOLAR_TOKEN_2"
 else
     cpolar authtoken "$CPOLAR_TOKEN_1"
