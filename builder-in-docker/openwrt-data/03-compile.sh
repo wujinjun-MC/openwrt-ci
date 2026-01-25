@@ -1,6 +1,8 @@
 #!/bin/bash
 set -euo pipefail
 
+echo "03-compile.sh start"
+
 cd builder
 export GITHUB_WORKSPACE="$(pwd)"
 cd openwrt
@@ -23,3 +25,5 @@ make -j$(nproc) || make -j1 V=s | tee "$OPENWRT_PATH/build-single-thread.log"
 
 # 编译结果位于 bin/targets
 ls bin/targets
+
+echo "03-compile.sh success"

@@ -1,6 +1,8 @@
 #!/bin/bash
 set -euo pipefail
 
+echo "01-prepare-env.sh start"
+
 # { Checkout, Clone Source Code(克隆源代码), Generate Release Tag (生成日期Tag) }
 git clone --depth 1 https://github.com/ing0928/openwrt-ax5-jdc.git builder
 git clone --depth 1 -b "$REPO_BRANCH" "$REPO_URL" builder/openwrt
@@ -15,8 +17,8 @@ export FIRMWARE_TAG="$RELEASE_TAG"
 # { Generate Variables(生成变量) }
 cd "$GITHUB_WORKSPACE"
 cp "$CONFIG_FILE" "$OPENWRT_PATH/.config"
-cd $OPENWRT_PATH
-make defconfig > /dev/null 2>&1
+cd "$OPENWRT_PATH"
+make defconfig
 export SOURCE_REPO="$(echo $REPO_URL | awk -F '/' '{print $(NF)}')"
 export DEVICE_TARGET=$(cat .config | grep CONFIG_TARGET_BOARD | awk -F '"' '{print $2}')
 export DEVICE_SUBTARGET=$(cat .config | grep CONFIG_TARGET_SUBTARGET | awk -F '"' '{print $2}')
@@ -56,3 +58,5 @@ cd "$OPENWRT_PATH"
 # { Load Custom Overwrite(加载自定义覆写) }
 chmod +x "$GITHUB_WORKSPACE/overwrite/overwrite-after-feeds-download.sh"
 "$GITHUB_WORKSPACE/overwrite/overwrite-after-feeds-download.sh"
+
+echo "01-prepare-env.sh success"

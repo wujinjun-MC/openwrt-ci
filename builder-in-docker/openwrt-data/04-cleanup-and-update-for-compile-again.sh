@@ -1,6 +1,8 @@
 #!/bin/bash
 set -euo pipefail
 
+echo "04-cleanup-and-update-for-compile-again.sh start"
+
 cd builder
 export GITHUB_WORKSPACE="$(pwd)"
 cd openwrt
@@ -42,3 +44,4 @@ cd "$OPENWRT_PATH"
 chmod +x "$GITHUB_WORKSPACE/overwrite/overwrite-after-feeds-download.sh"
 "$GITHUB_WORKSPACE/overwrite/overwrite-after-feeds-download.sh"
 
+echo "04-cleanup-and-update-for-compile-again.sh success"
