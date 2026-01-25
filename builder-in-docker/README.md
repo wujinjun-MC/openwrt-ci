@@ -24,3 +24,11 @@ bash 02-menuconfig.sh
 bash 03-compile.sh
 bash 04-cleanup-and-update-for-compile-again.sh
 ```
+
+代理加速下载:
+```bash
+# 需要运行容器时 "--network host"
+# 在容器内执行命令前
+export http_proxy=http://127.0.0.1:7897
+export https_proxy=$http_proxy
+```
