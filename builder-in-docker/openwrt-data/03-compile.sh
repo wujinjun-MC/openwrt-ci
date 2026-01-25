@@ -19,7 +19,7 @@ echo -e "$(nproc) thread compile"
 # 记录开始编译时的时间戳
 export TIMESTAMP_START_COMPILE=$(printf "%(%s)T")
 # 第一次尝试：多线程编译
-make -j$(nproc) || make -j1 V=s | tee -a "$OPENWRT_PATH/build-single-thread.log"
+make -j$(nproc) || make -j1 V=s | tee "$OPENWRT_PATH/build-single-thread.log"
 
 # 编译结果位于 bin/targets
 ls bin/targets
