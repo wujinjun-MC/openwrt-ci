@@ -9,6 +9,9 @@
     2. 更改配置: `bash 02-menuconfig.sh`
     3. 编译: `bash 03-compile.sh`
     4. 清除准备下次编译: `bash 04-cleanup-and-update-for-compile-again.sh`
+5. 快速停止容器: `docker stop -t 0 openwrt-build`
+
+快速脚本示例 (适合copy-paste):
 
 ```bash
 # In your machine
