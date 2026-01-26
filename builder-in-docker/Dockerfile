@@ -1,4 +1,4 @@
-# 使用 Ubuntu 22.04 作为基础镜像
+# 使用 Ubuntu latest 作为基础镜像
 FROM ubuntu:latest
 
 # 环境变量设置
@@ -29,15 +29,13 @@ RUN rm -rf /var/lib/apt/lists/*
 # 设置时区
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-# 创建非 root 用户 (OpenWrt 严禁使用 root 编译)
-RUN useradd -m build && echo "build:build" | chpasswd s&& adduser build sudo
-RUN echo 'build ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoer
+RUN adduser ubuntu sudo
+RUN echo 'ubuntu ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoer
 
 # 防止权限错误
-RUN chmod -R 777 /home/build
+RUN chmod -R 777 .
 
-USER build
-WORKDIR /home/build
+WORKDIR /home/ubuntu
 
 STOPSIGNAL SIGKILL
 # 进入shell，开始自定义
