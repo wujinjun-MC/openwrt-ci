@@ -35,5 +35,6 @@ RUN echo 'ubuntu ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoer
 WORKDIR /home/ubuntu
 
 STOPSIGNAL SIGKILL
+
 # 进入shell，开始自定义
 CMD ["/bin/bash"]
