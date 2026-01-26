@@ -332,7 +332,9 @@ jobs:
           - 固件编译前最后一次➦[主源码](${{ env.REPO_URL }})更新记录:
             - ${{ env.VERSION_INFO }}
           ### Custom Release Notes
+          ```
           ${{ env.CUSTOM_RELEASE_NOTES || 'None' }}
+          ```
 
     - name: Print disk usage 4
       if: always()
