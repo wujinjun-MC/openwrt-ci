@@ -3,8 +3,8 @@
 1. 如果使用Btrfs，请关闭当前文件夹的写时复制 (CoW) 避免占用快照空间 `sudo chattr +C builder-in-docker/openwrt-data`
 2. 进入此目录: `cd builder-in-docker/`
 3. 创建镜像: `docker build -t libwrt-builder-ax5_jdc .`
-4. 创建和进入容器: `docker run -it --name openwrt-build --network host -v $(pwd)/openwrt-data:/home/build libwrt-builder-ax5_jdc:latest`
-    - 如需编译完自动删除容器 (记得复制编译产物): `docker run -it --rm --name openwrt-build --network host -v $(pwd)/openwrt-data:/home/build libwrt-builder-ax5_jdc:latest`
+4. 创建和进入容器: `docker run -it --name openwrt-build --network host -v $(pwd)/openwrt-data:/home/ubuntu libwrt-builder-ax5_jdc:latest`
+    - 如需编译完自动删除容器 (记得复制编译产物): `docker run -it --rm --name openwrt-build --network host -v $(pwd)/openwrt-data:/home/ubuntu libwrt-builder-ax5_jdc:latest`
 5. 在容器内:
     1. 准备环境: `bash 01-prepare-env.sh`
     2. 更改配置: `bash 02-menuconfig.sh`
@@ -18,7 +18,7 @@
 # In your machine
 cd builder-in-docker/
 docker build -t libwrt-builder-ax5_jdc .
-docker run -it --name openwrt-build --network host -v $(pwd)/openwrt-data:/home/build libwrt-builder-ax5_jdc:latest
+docker run -it --name openwrt-build --network host -v $(pwd)/openwrt-data:/home/ubuntu libwrt-builder-ax5_jdc:latest
 # In container
 bash 01-prepare-env.sh
 bash 02-menuconfig.sh
