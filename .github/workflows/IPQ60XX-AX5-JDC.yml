@@ -233,7 +233,7 @@ jobs:
         echo >> "$OPENWRT_PATH/build-log.log"
 
         # 第一次尝试：多线程编译
-        make -j$(nproc) V=s | tee -a "$OPENWRT_PATH/build-log.log"
+        make -j$(nproc) V=s 2>&1 | tee -a "$OPENWRT_PATH/build-log.log"
 
         echo >> "$OPENWRT_PATH/build-log.log"
         echo "-------- Stop building - $(date +"%Y-%m-%d %H:%M:%S") --------" >> "$OPENWRT_PATH/build-log.log"
@@ -256,7 +256,7 @@ jobs:
         echo "多线程编译失败，正在切换至单线程详细模式 (V=s) 以获取错误日志..."
         # 单线程编译，V=s 会打印所有错误输出
         echo "compile=true" >> $GITHUB_OUTPUT
-        make -j1 V=s | tee -a "$OPENWRT_PATH/build-log.log"
+        make -j1 V=s 2>&1 | tee -a "$OPENWRT_PATH/build-log.log"
         
         echo >> "$OPENWRT_PATH/build-log.log"
         echo "-------- Stop building - $(date +"%Y-%m-%d %H:%M:%S") --------" >> "$OPENWRT_PATH/build-log.log"

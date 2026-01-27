@@ -31,9 +31,9 @@ echo >> "$OPENWRT_PATH/build-log.log"
 if [[ -v force_single_thread ]]
 then
     echo "!! Force Single Thread Mode" | tee -a "$OPENWRT_PATH/build-log.log"
-    make -j1 V=s | tee -a "$OPENWRT_PATH/build-log.log"
+    make -j1 V=s 2>&1 | tee -a "$OPENWRT_PATH/build-log.log"
 else
-    make -j$(nproc) | tee -a "$OPENWRT_PATH/build-log.log"
+    make -j$(nproc) 2>&1 | tee -a "$OPENWRT_PATH/build-log.log"
 fi
 echo >> "$OPENWRT_PATH/build-log.log"
 echo "-------- Stop building - $(date +"%Y-%m-%d %H:%M:%S") --------" >> "$OPENWRT_PATH/build-log.log"
