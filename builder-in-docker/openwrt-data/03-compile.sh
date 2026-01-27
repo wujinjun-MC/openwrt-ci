@@ -14,9 +14,29 @@ make defconfig
 if ! [[ -f "$OPENWRT_PATH/flags-downloaded-packages" ]]
 then
     make download -j8
-    find dl -size -1024c -exec ls -l {} \;
-    find dl -size -1024c -exec rm -f {} \;
+    #find dl -size -1024c -exec ls -l {} \;
+    #find dl -size -1024c -exec rm -f {} \;
     touch "$OPENWRT_PATH/flags-downloaded-packages"
+    # 检查和构建ccache
+    if ! grep "CONFIG_CCACHE=y" .config
+    then
+        if [ -f ./staging_dir/host/bin/ccache ]
+        then
+        echo "已打开ccache选项，并且工具链已存在，跳过工具链构建"
+        else
+        echo "已打开ccache选项，但需要构建到指定目录。正在构建..."
+        sed -i 's/^CONFIG_CCACHE=y/# CONFIG_CCACHE is not set/' .config
+        if make tools/ccache/compile V=s
+        then
+            echo "ccache 构建成功，本次编译将支持ccache"
+            make tools/install
+        else
+            echo "ccache 构建失败，正在关闭ccache"
+            sed -i 's/^CONFIG_CCACHE=y/# CONFIG_CCACHE is not set/' .config
+            make defconfig
+        fi
+        fi
+    fi
 fi
 
 # { Compile Firmware (多线程尝试), Compile Firmware Single Thread with Verbosity (单线程详细模式) }
