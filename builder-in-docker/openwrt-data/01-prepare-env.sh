@@ -43,7 +43,7 @@ rm -rf package/new/custom
 # { Load Custom Configuration(加载自定义配置) }
 cd "$GITHUB_WORKSPACE"
 [ -e files ] && mv files "$OPENWRT_PATH/files"
-[ -e "$CONFIG_FILE" ] && mv "$CONFIG_FILE" "$OPENWRT_PATH/.config"
+[ -e "$CONFIG_FILE" ] && cp "$CONFIG_FILE" "$OPENWRT_PATH/.config"
 chmod +x "$DIY_SCRIPT"
 cd "$OPENWRT_PATH"
 "$GITHUB_WORKSPACE/$DIY_SCRIPT"

@@ -16,7 +16,7 @@
    3. Tailscale (community)
    4. [small-package](https://github.com/kenzok8/small-package): 更多软件包
 4. 自定义overwrite
-   1. [01-nginx-disable-https](https://github.com/wujinjun-MC/openwrt-ax5-jdc/blob/main/overwrite/01-nginx-disable-https) nginx默认使用http
+   1. [01-nginx-disable-https](./overwrite/01-nginx-disable-https) nginx默认使用http
    2. 
 5. release信息:
    1. 显示编译时所使用的commit (包括源码和本仓库的)
@@ -24,8 +24,19 @@
 6. 解决了部分常见问题
    1. `ip-full` 和 `ip-tiny` 冲突 - 禁用 `ip-tiny`
    2. 修复UPnP - 默认打开libupnp
-   3. 
+   3. 关闭 `luci-app-oaf` 避免编译appfilter(有bug无法编译)
 7. 根据actions过程创建Dockerfile和所需的一键脚本，方便本地编译
+
+### 已测试通过
+1. luci类 (省略 `luci-app-` 开头)
+   1. [ddnsto,linkease](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.27-1140)
+   2. [amule,upnp](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.27-1139)
+   3. [qbittorrent,adblock-fast,adguard](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.27-1138)
+   4. [tailscale-community](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.27-0837)
+   5. [adblock-fast,adguard](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.27-0832)
+   6. netdata
+   7. [qbittorrent,adblock-fast,adguard](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.27-1138)
+2. 将默认uhttpd换成nginx (需要使用[overwrite 1](./overwrite/01-nginx-disable-https) 自动关闭HTTPS)
 
 ## 原README ↓
 

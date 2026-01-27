@@ -320,6 +320,9 @@ jobs:
           **This is OpenWrt Firmware for (IPQ60XX-AX5-JDC-6.12-WIFI)**
           ### Builder信息
           - 🔗 源码版本: [${{ env.SHORT_COMMIT_BUILDER }}](${{ env.REPO_URL_BUILDER }}/commit/${{ env.COMMIT_HASH_BUILDER }})
+          - 🚀 本次运行 Workflow: [#${{ github.run_number }} (${{ github.run_id }})](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+          - 🛠️ workflow 定义文件: [${{ github.workflow }}](${{ github.server_url }}/${{ github.repository }}/blob/${{ github.ref_name }}/.github/workflows/${{ github.workflow }}.yml)
+          - ⚙️ 编译模式: ${{ env.FORCE_SINGLE_THREAD == 'true' && '强制单线程' || '自动多线程' }}
           ### 📒 固件信息(WIFI)
           - 带WIFI带有线NSS的6.12内核固件
           - 💻 这是 (IPQ60XX-AX5-JDC-6.12-WIFI) 平台使用的 OpenWrt 固件
