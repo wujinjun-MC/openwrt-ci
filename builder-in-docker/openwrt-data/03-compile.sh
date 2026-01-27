@@ -24,7 +24,7 @@ if grep "CONFIG_CCACHE=y" .config; then
     if [ -f "$OPENWRT_PATH/staging_dir/host/bin/ccache" ]; then
         echo "已打开ccache选项，并且工具链已存在，跳过工具链构建"
     else
-        echo "已打开ccache选项，但需要构建到指定目录。正在构建..."
+        echo "已打开ccache选项，但ccache工具链需要构建到指定目录。正在构建..."
         if make tools/ccache/compile -j$(nproc); then
             echo "ccache 构建成功，本次编译将支持ccache"
             make tools/install
