@@ -50,6 +50,8 @@
    1. kmod-oaf, luci-app-appfilter, luci-app-oaf, PACKAGE_appfilter
 3. 源码有bug
    1. luci-app-cjdns: `AttributeError: module 'collections' has no attribute 'MutableSet'`
+4. 冲突
+   1. BitTorrent, P2P全开 导致 qbittorrent 安装失败
 
 ## 原README ↓
 
