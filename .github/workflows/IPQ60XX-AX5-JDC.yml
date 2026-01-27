@@ -212,7 +212,6 @@ jobs:
             echo "已打开ccache选项，并且工具链已存在，跳过工具链构建"
           else
             echo "已打开ccache选项，但需要构建到指定目录。正在构建..."
-            sed -i 's/^CONFIG_CCACHE=y/# CONFIG_CCACHE is not set/' .config
             if make tools/ccache/compile -j$(nproc)
             then
               echo "ccache 构建成功，本次编译将支持ccache"
