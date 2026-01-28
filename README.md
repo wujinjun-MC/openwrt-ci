@@ -45,17 +45,23 @@
       2. [arpbind, autoipsetadder, autoreboot, autorepeater, banip, bcp38, beardropper](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.27-2004)
       3. [control-timewol, control-webrestriction, control-weburl, cpufreq, cpulimit, dcwapd](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.27-2201)
       4. [cifs-mount, cloudflared, cloudflarespeedtest, commands](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.27-2359)
-      5. [ddnsto, diskman(not include btrfs), dnsfilter(必须检查默认的`Base system -> dnsmasq`是否关闭(与`dnsmasq-full`冲突)), dnsmasq-ipset(也是个`dnsmasq-full`), dnsproxy](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases)
+      5. [ddnsto, diskman(not include btrfs), dnsfilter(必须检查默认的`Base system -> dnsmasq`是否关闭(与`dnsmasq-full`冲突)), dnsmasq-ipset(也是个`dnsmasq-full`), dnsproxy](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.28-1024)
+      6. [eqos, eqosplus, example](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.28-1034)
+      7. [fastnet, fchomo, filemanager, fullconenat](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.28-1038)
+      99. [kai, ksmbd, ledtrig-rssi, ledtrig-switch](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases) (Docker本地编译，没有Release)
 2. 将默认uhttpd换成nginx (需要使用[overwrite 1](./overwrite/01-nginx-disable-https) 自动关闭HTTPS)
 
 ### 无法使用
 1. `ERROR: info field 'version' has invalid value: package version is invalid` (可能因为OpenWRT官方从OPKG换成apk,部分软件包未适配，请耐心等待)
    1. luci-app-uptimekuma
-   2. luci-app-store, luci-app-quickstart, luci-app-istorex ...
+   2. luci-app-store (依赖 by luci-app-quickstart, luci-app-istorex ...)
    3. luci-theme-design, luci-app-design-config
    4. luci-app-drawio
-   5. luci-app-ittools
-   6. luci-app-jackett
+   5. luci-app-gogs
+   6. luci-app-heimdall
+   7. vmease (依赖 by luci-app-istoredup)
+   8. luci-app-ittools
+   9. luci-app-jackett
 2. 内核不兼容
    1. kmod-oaf, luci-app-appfilter, luci-app-oaf, PACKAGE_appfilter
 3. 源码有bug
@@ -64,6 +70,12 @@
    1. BitTorrent, P2P全开 导致 qbittorrent 安装失败
 5. 看起来编译成功，实际刷入后用不了
    1. luci-theme-argone (+ luci-app-argone-config): 设置主题后直接出现luci错误，必须进SSH改回原来主题
+6. 迷惑行为
+   1. luci-app-mosdns: 自己覆盖自己 `ERROR: luci-app-mosdns-1.6.16-r1: trying to overwrite etc/init.d/mosdns owned by mosdns-5.3.3-r1.`
+7. 缺失依赖
+   1. luci-app-gowebdav: 找不到 `gowebdav`
+8. 工具链兼容性(一般发生在停更的软件包)
+   1. n2n (依赖 by luci-app-n2n): `Compatibility with CMake < 3.5 has been removed from CMake`
 
 ## 原README ↓
 
