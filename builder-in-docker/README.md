@@ -38,3 +38,12 @@ export https_proxy=$http_proxy
 避免跳过`make download`: 删除 `builder-in-docker/openwrt-data/builder/openwrt/flags-downloaded-packages`
 
 强制单线程编译: 容器内 `export force_single_thread=1`
+
+注意:
+
+1. 避免在路径中出现空格、中文等特殊字符，否则部分PATH会出错
+    - WSL用户: 修改配置 `sudo nano /etc/wsl.conf` 然后重启WSL
+        ```toml
+        [interop]
+        appendWindowsPath = false
+        ```
