@@ -38,7 +38,7 @@ if grep "CONFIG_CCACHE=y" .config; then
     
     # 提高ccache缓存大小以提高命中率 (可选)
     if ! [[ -v ccache_keep_default_cache_size ]]; then
-        ccache_cache_size=${ccache_cache_size:-32G}
+        ccache_cache_size=${ccache_cache_size:-32.0G}
         echo "未设置 "'$ccache_keep_default_cache_size'" ，正在检测和提高ccache缓存大小到$ccache_cache_size"
         if [ -f .ccache/ccache.conf ]; then
             echo "已经设置过缓存大小，跳过"
@@ -46,6 +46,7 @@ if grep "CONFIG_CCACHE=y" .config; then
             echo "未设置缓存大小，正在写入设置"
             mkdir -p .ccache/
             touch .ccache/ccache.conf
+            echo "max_size = $ccache_cache_size" >> .ccache/ccache.conf
         fi
     else
         echo "已设置"'$ccache_keep_default_cache_size'" ，跳过ccache缓存设置"
