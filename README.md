@@ -50,6 +50,7 @@
 1. `ERROR: info field 'version' has invalid value: package version is invalid` (可能因为OpenWRT官方从OPKG换成apk,部分软件包未适配，请耐心等待)
    1. luci-app-uptimekuma
    2. luci-app-store, luci-app-quickstart, luci-app-istorex ...
+   3. luci-theme-design, 
 2. 内核不兼容
    1. kmod-oaf, luci-app-appfilter, luci-app-oaf, PACKAGE_appfilter
 3. 源码有bug
