@@ -55,6 +55,7 @@
    3. luci-theme-design, luci-app-design-config
    4. luci-app-drawio
    5. luci-app-ittools
+   6. luci-app-jackett
 2. 内核不兼容
    1. kmod-oaf, luci-app-appfilter, luci-app-oaf, PACKAGE_appfilter
 3. 源码有bug
