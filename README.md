@@ -48,8 +48,10 @@
       5. [ddnsto, diskman(not include btrfs), dnsfilter(必须检查默认的`Base system -> dnsmasq`是否关闭(与`dnsmasq-full`冲突)), dnsmasq-ipset(也是个`dnsmasq-full`), dnsproxy](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.28-1024)
       6. [eqos, eqosplus, example](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.28-1034)
       7. [fastnet, fchomo, filemanager, fullconenat](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.28-1038)
-      98. [lldpd, lxc, mac, mfun](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases) (Docker本地编译，没有Release)
-      99. [kai, ksmbd, ledtrig-rssi, ledtrig-switch](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases) (Docker本地编译，没有Release)
+      8.  [kai, ksmbd, ledtrig-rssi, ledtrig-switch](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases) (Docker本地编译，没有Release)
+      9.  [lldpd, lxc, mac, mfun](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases) (Docker本地编译，没有Release)
+      99. [msd_lite, my-dnshelper](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases) (Docker本地编译，没有Release)
+      99. [nfs, nginx-manager, nlbwmon, npc, nps, frpc, frps](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases) (Docker本地编译，没有Release)
 2. 将默认uhttpd换成nginx (需要使用[overwrite 1](./overwrite/01-nginx-disable-https) 自动关闭HTTPS)
 
 ### 无法使用
@@ -60,9 +62,14 @@
    4. luci-app-drawio
    5. luci-app-gogs
    6. luci-app-heimdall
+   6. luci-app-homeassistant
+   6. luci-app-homeredirect
+   6. luci-app-istorepanel
+   6. luci-app-nastools
    7. vmease (依赖 by luci-app-istoredup)
    8. luci-app-ittools
    9. luci-app-jackett
+   10. luci-app-mymind
 2. 内核不兼容
    1. kmod-oaf, luci-app-appfilter, luci-app-oaf, PACKAGE_appfilter
 3. 源码有bug

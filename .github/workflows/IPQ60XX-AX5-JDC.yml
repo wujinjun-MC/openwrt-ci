@@ -214,6 +214,8 @@ jobs:
 
     - name: Build ccache if needed (在需要时设置ccache)
       run: |
+        cd $OPENWRT_PATH
+
         # 如果设置使用ccache,自动打开
         if [ "$USE_CCACHE"x = "true"x ]; then
           echo "检测到 "'$USE_CCACHE'" = true，正在修改配置以开启ccache"
