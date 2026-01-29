@@ -61,7 +61,7 @@
 ### 无法使用
 1. `ERROR: info field 'version' has invalid value: package version is invalid` (可能因为OpenWRT官方从OPKG换成apk,部分软件包未适配，请耐心等待) (如果急需这些软件包，需要在新增actions run时开启 `-` / 本地Docker编译时设置 `=1` ，使用overwrite遍历修复版本号(会导致其他正常软件包的版本号被修改))
    1. luci-app-uptimekuma
-   2. luci-app-store (依赖 by luci-app-quickstart, luci-app-istorex ...)
+   2. luci-app-store (依赖 by luci-app-quickstart, luci-app-istorex, luci-app-routerdog ...)
    3. luci-theme-design, luci-app-design-config
    4. luci-app-drawio
    5. luci-app-gogs
