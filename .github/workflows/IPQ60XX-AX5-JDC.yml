@@ -286,6 +286,7 @@ jobs:
       if: ${{ !env.FORCE_SINGLE_THREAD }}
       continue-on-error: true # 允许此步失败，以便触发下方的重试逻辑
       run: |
+        set -o pipefail
         cd $OPENWRT_PATH
         echo -e "$(nproc) thread compile"
         # 记录开始编译时的时间戳
@@ -296,7 +297,7 @@ jobs:
         echo >> "$OPENWRT_PATH/build-log.log"
 
         # 第一次尝试：多线程编译
-        make -j$(nproc) V=s 2>&1 | tee -a "$OPENWRT_PATH/build-log.log"
+        make -j$(( $(nproc) * 2 )) V=s 2>&1 | tee -a "$OPENWRT_PATH/build-log.log"
 
         echo >> "$OPENWRT_PATH/build-log.log"
         echo "-------- Stop building - $(date +"%Y-%m-%d %H:%M:%S") --------" >> "$OPENWRT_PATH/build-log.log"
@@ -310,13 +311,14 @@ jobs:
       id: compile_j1  
       if: ${{ steps.compile.outputs.status != 'success' || env.FORCE_SINGLE_THREAD }}
       run: |
+        set -o pipefail
         cd $OPENWRT_PATH
 
         echo >> "$OPENWRT_PATH/build-log.log"
         echo "-------- Start building - $(date +"%Y-%m-%d %H:%M:%S") --------" >> "$OPENWRT_PATH/build-log.log"
         echo >> "$OPENWRT_PATH/build-log.log"
 
-        echo "多线程编译失败，正在切换至单线程详细模式 (V=s) 以获取错误日志..."
+        echo "单线程详细模式 (V=s)"
         # 单线程编译，V=s 会打印所有错误输出
         echo "compile=true" >> $GITHUB_OUTPUT
         make -j1 V=s 2>&1 | tee -a "$OPENWRT_PATH/build-log.log"
