@@ -204,6 +204,12 @@ jobs:
         # 你可以在 SSH 终端里执行 cd $OPENWRT_PATH && make menuconfig
         bash ${GITHUB_WORKSPACE}/debug-via-reverse-proxy.sh
 
+    - name: Place bash history (注入bash命令历史记录)
+      if: ${{ env.CPOLAR != 'debug' }}
+      shell: bash
+      run: |
+        cp "$GITHUB_WORKSPACE/bash_history" ~/.bash_history
+
     - name: Download DL Package (下载DL软件包)
       run: |
         cd $OPENWRT_PATH
