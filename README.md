@@ -33,7 +33,7 @@
 
 ### 已测试通过
 
-注: 部分固件无法直接刷入，会导致重启循环。需要先刷入底包(上游或[pure build](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.28-0258))，然后使用系统更新 `sysupgrade` 刷入
+注: 部分固件无法直接刷入，会导致重启循环。需要先刷入底包(上游或~~[pure build](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.28-0258)~~ (也无法启动))，然后使用系统更新 `sysupgrade` 刷入
 
 1. luci类 (省略 `luci-app-` 开头)
    1. [ddnsto,linkease](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.27-1140)
@@ -44,27 +44,64 @@
    6. netdata
    7. [amule,qbittorrent,transmission](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.27-1457)
    8. 顺序开启部分编译项 (20260127 ~ )
-      1. [acl, advanced, alpha-config, argone-config](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.27-1808) -- 启动成功，argone主题加载失败
-      2. [arpbind, autoipsetadder, autoreboot, autorepeater, banip, bcp38, beardropper](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.27-2004) -- 启动成功，[autorepeater失败](#failed-plugin-luci-app-autorepeater)
+      1. [acl, advanced, alpha-config, argone-config](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.27-1808)
+         - 启动成功
+         - argone主题加载失败
+         - factory=30 MB, sysupgrade=29.5 MB
+      2. [arpbind, autoipsetadder, autoreboot, autorepeater, banip, bcp38, beardropper](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.27-2004)
+         - 启动成功
+         - [autorepeater失败](#failed-plugin-luci-app-autorepeater)
+         - factory=30.5 MB, sysupgrade=30 MB
       3. [control-timewol, control-webrestriction, control-weburl, cpufreq, cpulimit, dcwapd](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.27-2201)
+         - factory=30.1 MB, sysupgrade=29.6 MB
       4. [cifs-mount, cloudflared, cloudflarespeedtest, commands](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.27-2359)
-      5. [ddnsto, diskman(not include btrfs), dnsfilter(必须检查默认的`Base system -> dnsmasq`是否关闭(与`dnsmasq-full`冲突)), dnsmasq-ipset(也是个`dnsmasq-full`), dnsproxy](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.28-1024)
+         - factory=39.2 MB, sysupgrade=38.7 MB
+      5. [ddnsto, diskman, dnsfilter, dnsmasq-ipset, dnsproxy](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.28-1024)
+         - diskman: 不包括btrfs
+         - dnsfilter: 必须检查默认的 `Base system -> dnsmasq` 是否关闭 (与 `dnsmasq-full` 冲突)
+         - dnsmasq-ipset: 也使用 `dnsmasq-full`
+         - factory=36.6 MB, sysupgrade=36.1 MB
       6. [eqos, eqosplus, example](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.28-1034)
+         - factory=29.9 MB, sysupgrade=29.4 MB
       7. [fastnet, fchomo, filemanager, fullconenat](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.28-1038)
+         - factory=45.6 MB, sysupgrade=45.1 MB
+      7. [fwknopd, gost, guest-wifi, hd-idle](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.29-0253)
+         - factory=38.6 MB, sysupgrade=38.2 MB
+      7. [https-dns-proxy, ikoolproxy](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.28-2316)
+         - factory=30.8 MB, sysupgrade=30.4 MB
       8. [internet-detector, iperf3-server, iptvhelper, irqbalance, istoreenhance, istorego](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.29-1836)
-      8.  [kai, ksmbd, ledtrig-rssi, ledtrig-switch](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases) (Docker本地编译，没有Release)
-      9.  [lldpd, lxc, mac, mfun](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases) (Docker本地编译，没有Release)
-      10. [msd_lite, my-dnshelper](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases) (Docker本地编译，没有Release)
+         - factory=84 MB, sysupgrade=83.5 MB
+      8.  [kai, ksmbd, ledtrig-rssi, ledtrig-switch](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases)
+         - Docker本地编译，没有Release
+      9.  [lldpd, lxc, mac, mfun](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases)
+         - Docker本地编译，没有Release
+      11. [microsocks， minidlna, mjpg-streamer, mosquitto](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.28-2305)
+         - factory=31.4 MB, sysupgrade=30.8 MB
+      10. [msd_lite, my-dnshelper](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases)
+         - Docker本地编译，没有Release
       11. [natter2, netdata, netspeedtest](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.29-2317)
-      12.  [nfs, nginx-manager, nlbwmon, npc, nps, frpc, frps](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases) (Docker本地编译，没有Release)
+         - factory=44.6 MB, sysupgrade=44 MB
+      12.  [nfs, nginx-manager, nlbwmon, npc, nps, frpc, frps](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases)
+         - Docker本地编译，没有Release
       13.  [ngrokc, nut, olsr, olsr-services, olsr-viz](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.29-2027)
+         - factory=30.6 MB, sysupgrade=30.1 MB
       14.  [poweroff, poweroffdevice, privoxy](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.29-2319)
+         - factory=29.8 MB, sysupgrade=29.3 MB
       15.  [pushbot, qbittorrent, qos, ramfree](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.29-2337)
+         - factory=43.3 MB, sysupgrade=42.9 MB
       16.  [rclone, rp-pppoe-server](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.30-0915)
+         - factory=53.3 MB, sysupgrade=52.8 MB
       17.  [spotifyd, squid, sshtunnel, ssr-mudb-server, ssr-plus (defaults)](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.30-0256)
-      18.  [openclash, openthread, openvpn, openvpn-client, openwisp](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases) (Docker本地编译，没有Release) (factory=39M, sysupgrade=39M)
-      19.  [oscam, ota, p910nd, packet-capture, pagekitec, partexp, passwall (defaults), pbr](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases) (Docker本地编译，没有Release) (factory=46M, sysupgrade=45M)
-      19.  [tailscale-community, taskplan, tcpdump, timecontrol, timewol, tinyfilemanager](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases) (Docker本地编译，没有Release) (factory=44M, sysupgrade=43M)
+         - factory: 58.9 MB, sysupgrade=58.4 MB
+      18.  [openclash, openthread, openvpn, openvpn-client, openwisp](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases)
+         - Docker本地编译，没有Release
+         - factory=39 M, sysupgrade=39 M
+      19.  [oscam, ota, p910nd, packet-capture, pagekitec, partexp, passwall (defaults), pbr](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases)
+         - Docker本地编译，没有Release
+         - factory=46 M, sysupgrade=45 M
+      19.  [tailscale-community, taskplan, tcpdump, timecontrol, timewol, tinyfilemanager](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases)
+         - Docker本地编译，没有Release
+         - factory=44 M, sysupgrade=43 M
 2. 将默认uhttpd换成nginx (需要使用[overwrite 1](./overwrite/01-nginx-disable-https) 自动关闭HTTPS)
 
 ### 无法使用
