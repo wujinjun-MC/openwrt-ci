@@ -63,7 +63,7 @@
       16.  [rclone, rp-pppoe-server](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.30-0915)
       17.  [spotifyd, squid, sshtunnel, ssr-mudb-server, ssr-plus (defaults)](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.30-0256)
       18.  [openclash, openthread, openvpn, openvpn-client, openwisp](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases) (Docker本地编译，没有Release) (factory=39M, sysupgrade=39M)
-      18.  [oscam, ota, p910nd, packet-capture, pagekitec, partexp, passwall (defaults), pbr](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases) (Docker本地编译，没有Release) (factory=46M, sysupgrade=45M)
+      19.  [oscam, ota, p910nd, packet-capture, pagekitec, partexp, passwall (defaults), pbr](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases) (Docker本地编译，没有Release) (factory=46M, sysupgrade=45M)
 2. 将默认uhttpd换成nginx (需要使用[overwrite 1](./overwrite/01-nginx-disable-https) 自动关闭HTTPS)
 
 ### 无法使用
@@ -74,18 +74,19 @@
    4. luci-app-drawio
    5. luci-app-gogs
    6. luci-app-heimdall
-   6. luci-app-homeassistant
-   6. luci-app-homeredirect
-   6. luci-app-istorepanel
-   8. luci-app-ittools
-   9. luci-app-jackett
-   10. luci-app-mymind
-   11. luci-app-nastools
-   11. luci-app-openwebui
-   10. luci-app-owntone
-   11. luci-app-penpot
-   11. luci-app-rtbwmon
-   12. vmease (依赖 by luci-app-istoredup)
+   7. luci-app-homeassistant
+   8. luci-app-homeredirect
+   9. luci-app-istorepanel
+   10. luci-app-ittools
+   11. luci-app-jackett
+   12. luci-app-mymind
+   13. luci-app-nastools
+   14. luci-app-openwebui
+   15. luci-app-owntone
+   16. luci-app-penpot
+   17. luci-app-rtbwmon
+   18. luci-app-shortcutmenu
+   19. vmease (依赖 by luci-app-istoredup)
 2. 内核不兼容
    1. kmod-oaf (依赖 by luci-app-appfilter, luci-app-oaf, PACKAGE_appfilter)
 3. 源码有bug
@@ -104,15 +105,23 @@
    2. luci-app-natmap: 找不到 `natmap`
 8. 工具链兼容性 (一般发生在停更的软件包)
    1. n2n (依赖 by luci-app-n2n): `Compatibility with CMake < 3.5 has been removed from CMake`
-   1. scutclient (依赖 by luci-app-scutclient): `Compatibility with CMake < 3.5 has been removed from CMake`
+   2. scutclient (依赖 by luci-app-scutclient): `Compatibility with CMake < 3.5 has been removed from CMake`
 9. 可能需要更改编译时生成的配置/脚本 (但make过程中不可能实现)
    1. luci-app-nginx-pingos: `./configure: error: the HTTP rewrite module requires the PCRE library. You can either disable the module by using --without-http_rewrite_module option, or install the PCRE library into the system, or build the PCRE library statically from the source with nginx by using --with-pcre=<path> option.`
 10. 导致编译时间过长 / Github Actions 超时
    1. 需要Node.js
       1. luci-app-snmpd
+      2. luci-app-alist
+      3. luci-app-openlist
+      4. luci-app-unblockmusic (如果选择 `UnblockNeteaseMusic NodeJS Version`)
+      5. luci-app-unblockneteasemusic (这个没有其他选项，必须依赖Node)
+      99999. ...
 11. 体积太大，可能无法刷入
    1. Docker。除了本身，需要docker的软件包如下 (部分)
       1. luci-app-penpot
+      2. luci-app-ubuntu
+      3. luci-app-ubuntu2
+      99999. ...
 
 
 ## 原README ↓
