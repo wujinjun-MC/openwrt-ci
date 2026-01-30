@@ -87,10 +87,11 @@
    16. luci-app-penpot
    17. luci-app-rtbwmon
    18. luci-app-shortcutmenu
-   18. luci-app-sunpanel
-   20. luci-app-typecho
-   21. luci-app-wan-mac (未测试)
-   22. vmease (依赖 by luci-app-istoredup)
+   19. luci-app-sunpanel
+   20. luci-app-systools
+   21. luci-app-typecho
+   22. luci-app-wan-mac (未测试)
+   23. vmease (依赖 by luci-app-istoredup)
 2. 内核不兼容
    1. kmod-oaf (依赖 by luci-app-appfilter, luci-app-oaf, PACKAGE_appfilter)
 3. 源码有bug
@@ -119,6 +120,7 @@
       3. luci-app-openlist
       4. luci-app-unblockmusic (如果选择 `UnblockNeteaseMusic NodeJS Version`)
       5. luci-app-unblockneteasemusic (这个没有其他选项，必须依赖Node)
+      6. luci-app-smartdns (可能是因为 +WebUI)
       99999. ...
 11. 体积太大，可能无法刷入
    1. Docker。除了本身，需要docker的软件包如下 (部分)
