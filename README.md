@@ -18,15 +18,18 @@
 4. 自定义overwrite
    1. [01-nginx-disable-https](./overwrite/01-nginx-disable-https) nginx默认使用http
    2. 
-5. release信息:
+5. 自定义patch
+   1. [02-*](./patch/02-*) 修复旧软件包 `ERROR: info field 'version' has invalid value: package version is invalid` 问题
+   2. 
+6. release信息:
    1. 显示编译时所使用的commit (包括源码和本仓库的)
    2. 自定义发布信息 (Release notes): 需要远程连接后，在源码目录创建 `custom_release_notes.txt`
-6. 解决了部分常见问题
+7. 解决了部分常见问题
    1. `ip-full` 和 `ip-tiny` 冲突 - 禁用 `ip-tiny`
    2. 修复UPnP - 默认打开libupnp
    3. 关闭 `luci-app-oaf` 避免编译appfilter(有bug无法编译)
    4. 自动编译缺失的 `ccache` 工具链 (即使已经安装 `ccache` 也不行，必须使用官方源码编译到指定目录)
-7. 根据actions过程创建Dockerfile和所需的一键脚本，方便本地编译
+8. 根据actions过程创建Dockerfile和所需的一键脚本，方便本地编译
 
 ### 已测试通过
 
@@ -57,6 +60,7 @@
       101. [ngrokc, nut, olsr, olsr-services, olsr-viz](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.29-2027)
       101. [poweroff, poweroffdevice, privoxy](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.29-2319)
       101. [pushbot, qbittorrent, qos, ramfree](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.29-2337)
+      102. [luci: spotifyd, squid, sshtunnel, ssr-mudb-server, ssr-plus (defaults)](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.30-0256)
 2. 将默认uhttpd换成nginx (需要使用[overwrite 1](./overwrite/01-nginx-disable-https) 自动关闭HTTPS)
 
 ### 无法使用
@@ -75,6 +79,7 @@
    10. luci-app-mymind
    11. luci-app-nastools
    11. luci-app-openwebui
+   11. luci-app-rtbwmon
    12. vmease (依赖 by luci-app-istoredup)
 2. 内核不兼容
    1. kmod-oaf (依赖 by luci-app-appfilter, luci-app-oaf, PACKAGE_appfilter)
@@ -88,11 +93,13 @@
    1. luci-app-mosdns: 自己覆盖自己 `ERROR: luci-app-mosdns-1.6.16-r1: trying to overwrite etc/init.d/mosdns owned by mosdns-5.3.3-r1.`
    2. luci-app-pppoe-relay: 自己覆盖自己 `ERROR: luci-app-pppoe-relay-26.028.32477~ec83425: trying to overwrite etc/init.d/pppoe-relay owned by rp-pppoe-relay-4.0-r2.`
    3. luci-app-pppoe-server: 自己覆盖自己 `ERROR: luci-app-pppoe-server-20200326-r8: trying to overwrite etc/init.d/pppoe-server owned by rp-pppoe-server-4.0-r2.`
+   4. luci-app-openvpn-server: 自己覆盖自己 `ERROR: luci-app-openvpn-server-3.0-r0: trying to overwrite etc/config/openvpn owned by openvpn-openssl-2.6.14-r4.`
 7. 缺失依赖
    1. luci-app-gowebdav: 找不到 `gowebdav`
    2. luci-app-natmap: 找不到 `natmap`
-8. 工具链兼容性(一般发生在停更的软件包)
+8. 工具链兼容性 (一般发生在停更的软件包)
    1. n2n (依赖 by luci-app-n2n): `Compatibility with CMake < 3.5 has been removed from CMake`
+   1. scutclient (依赖 by luci-app-scutclient): `Compatibility with CMake < 3.5 has been removed from CMake`
 9. 可能需要更改编译时生成的配置/脚本 (但make过程中不可能实现)
    1. luci-app-nginx-pingos: `./configure: error: the HTTP rewrite module requires the PCRE library. You can either disable the module by using --without-http_rewrite_module option, or install the PCRE library into the system, or build the PCRE library statically from the source with nginx by using --with-pcre=<path> option.`
 
@@ -138,7 +145,9 @@
 
 ## Others
 
-### 安装后无法使用的插件
+### 详细信息
+
+#### 安装后无法使用的插件
 
 1. autorepeater <span id="failed-plugin-luci-app-autorepeater"></span>
 
