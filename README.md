@@ -62,7 +62,8 @@
       15.  [pushbot, qbittorrent, qos, ramfree](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.29-2337)
       16.  [rclone, rp-pppoe-server](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.30-0915)
       17.  [spotifyd, squid, sshtunnel, ssr-mudb-server, ssr-plus (defaults)](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.30-0256)
-      18.  [openclash, openthread, openvpn, openvpn-client, openwisp](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases) (Docker本地编译，没有Release) (factory=46M, sysupgrade=45M)
+      18.  [openclash, openthread, openvpn, openvpn-client, openwisp](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases) (Docker本地编译，没有Release) (factory=39M, sysupgrade=39M)
+      18.  [oscam, ota, p910nd, packet-capture, pagekitec, partexp, passwall (defaults), pbr](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases) (Docker本地编译，没有Release) (factory=46M, sysupgrade=45M)
 2. 将默认uhttpd换成nginx (需要使用[overwrite 1](./overwrite/01-nginx-disable-https) 自动关闭HTTPS)
 
 ### 无法使用
