@@ -5,3 +5,8 @@ if [ "$FIX_VERSION_INVALID"x = "true"x ]; then
     echo ">> Execute $GITHUB_WORKSPACE/patch/01-fix-version-invalid.py"
     python3 "$GITHUB_WORKSPACE/patch/01-fix-version-invalid.py" --apply --dir "$OPENWRT_PATH/feeds/"
 fi
+
+# 2. patch-02-fix-KMOD_oaf-app_filter-dot-c-indent-mixed-space-and-tab 修复 oaf 内核模块 缩进混用空格和TAB
+echo "Applying patch-02-fix-KMOD_oaf-app_filter-dot-c-indent-mixed-space-and-tab ( 修复 oaf 内核模块 缩进混用空格和TAB )"
+echo ">> Execute $GITHUB_WORKSPACE/patch/02-fix-KMOD_oaf-app_filter-dot-c-indent-mixed-space-and-tab.sh"
+bash "$GITHUB_WORKSPACE/patch/02-fix-KMOD_oaf-app_filter-dot-c-indent-mixed-space-and-tab.sh"

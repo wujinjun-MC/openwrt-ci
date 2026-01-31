@@ -167,6 +167,7 @@
    1. kmod-oaf (依赖 by luci-app-appfilter, luci-app-oaf, PACKAGE_appfilter)
 3. 源码有bug
    1. luci-app-cjdns: `AttributeError: module 'collections' has no attribute 'MutableSet'`
+   2. luci-app-quickstart: `luci-app-quickstart does not support JavaScript source minification`, `luci-app-quickstart does not support CSS source minification`
 4. 冲突
    1. BitTorrent, P2P全开 导致 qbittorrent 安装失败
 5. 看起来编译成功，实际刷入后用不了
