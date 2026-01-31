@@ -5,6 +5,8 @@ echo "01-prepare-env.sh start"
 
 touch ./.env
 export SHARED_ENV=$(realpath ./.env)
+export FIX_VERSION_INVALID=true
+echo "export FIX_VERSION_INVALID=true" >> "$SHARED_ENV"
 
 # { Checkout, Clone Source Code(克隆源代码), Generate Release Tag (生成日期Tag) }
 [[ -v REPO_URL_BUILDER ]] || export REPO_URL_BUILDER="https://github.com/wujinjun-MC/openwrt-ax5-jdc.git"
@@ -51,5 +53,9 @@ cd "$OPENWRT_PATH"
 # { Load Custom Overwrite(加载自定义覆写) }
 chmod +x "$GITHUB_WORKSPACE/overwrite/overwrite-after-feeds-download.sh"
 "$GITHUB_WORKSPACE/overwrite/overwrite-after-feeds-download.sh"
+
+# { Load Custom Patch(加载自定义修补) }
+chmod +x $GITHUB_WORKSPACE/patch/patch-after-feeds-download.sh
+$GITHUB_WORKSPACE/patch/patch-after-feeds-download.sh
 
 echo "01-prepare-env.sh success"

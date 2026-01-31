@@ -39,6 +39,8 @@ export https_proxy=$http_proxy
 
 强制单线程编译: 容器内 `export force_single_thread=1`
 
+自动修复插件版本号不合法: `export FIX_VERSION_INVALID=true` (在 [01-prepare-env](./openwrt-data/01-prepare-env.sh) 默认开启 如需关闭注释掉两行)
+
 注意:
 
 1. 避免在路径中出现空格、中文等特殊字符，否则部分PATH会出错

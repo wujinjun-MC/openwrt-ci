@@ -19,7 +19,7 @@
    1. [01-nginx-disable-https](./overwrite/01-nginx-disable-https) nginx默认使用http
    2. 
 5. 自定义patch
-   1. [02-*](./patch/02-*) 修复旧软件包 `ERROR: info field 'version' has invalid value: package version is invalid` 问题
+   1. [01-fix-version-invalid](./patch/01-fix-version-invalid.py*) 修复旧软件包 `ERROR: info field 'version' has invalid value: package version is invalid` 问题
    2. 
 6. release信息:
    1. 显示编译时所使用的commit (包括源码和本仓库的)
@@ -135,7 +135,7 @@
 2. 将默认uhttpd换成nginx (需要使用[overwrite 1](./overwrite/01-nginx-disable-https) 自动关闭HTTPS)
 
 ### 无法使用
-1. `ERROR: info field 'version' has invalid value: package version is invalid` (可能因为OpenWRT官方从OPKG换成apk,部分软件包未适配，请耐心等待) (如果急需这些软件包，需要在新增actions run时开启 `undefined-` / 本地Docker编译时设置 `undefined=1` 。将会使用overwrite遍历修复版本号(会导致其他正常软件包的版本号被修改))
+1. `ERROR: info field 'version' has invalid value: package version is invalid` (可能因为OpenWRT官方从OPKG换成apk,部分软件包未适配，请耐心等待) (如果急需这些软件包，需要在新增actions run时开启 `fix_version_invalid` / 本地Docker编译时设置 `FIX_VERSION_INVALID=true` 。将会使用overwrite遍历修复版本号(可能会导致其他正常软件包的版本号被修改))
    1. luci-app-uptimekuma
    2. luci-app-store (依赖 by luci-app-quickstart, luci-app-istorex, luci-app-routerdog ...)
    3. luci-theme-design, luci-app-design-config
