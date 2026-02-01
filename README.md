@@ -195,6 +195,7 @@
       4. luci-app-unblockmusic (如果选择 `UnblockNeteaseMusic NodeJS Version`)
       5. luci-app-unblockneteasemusic (这个没有其他选项，必须依赖Node)
       6. luci-app-smartdns (可能是因为 +WebUI)
+      6. luci-app-subconverter
       99999. ...
 11. 体积太大，可能无法刷入
    1. Docker。除了本身，需要docker的软件包如下 (部分)
