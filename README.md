@@ -4,12 +4,13 @@
 
 1. 修改默认管理地址
 2. actions过程 (部分灵感来源于[旧项目](https://github.com/wujinjun-MC/build-openwrt))
-   1. 支持远程调试和修改配置 `make menuconfig` (当前支持Cpolar，可设置两个token负载均衡)
+   1. 支持远程调试和修改配置 `make menuconfig` (当前支持 Cpolar ，可设置两个 token 负载均衡，建议使用[此 Tampermonkey 脚本](https://greasyfork.org/scripts/564723)以加快操作)
    2. 将更多硬盘空间用于编译
-   3. 直接进入单线程模式，并上传编译日志到artifact，便于排查错误
-   4. 编译开始前上传配置`.config`到artifact
-   5. (远程)自动进入工作目录、一键menuconfig
-   6. release防覆盖
+   3. 直接进入单线程模式，并上传编译日志到 artifact ，便于排查错误
+   4. 编译开始前上传配置 `.config` 到 artifact
+   5. (远程)自动进入工作目录、一键 menuconfig
+   6. release 防覆盖
+   7. 兼容 opkg 模式
 3. 添加软件包/源
    1. [nas-packages-luci](https://github.com/linkease/nas-packages-luci): iStoreOS风格主页、快速配置、应用商店、...
    2. AdGuard Home
@@ -82,6 +83,7 @@
       15. [natter2, netdata, netspeedtest](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.29-2317)
          - factory=44.6 MB, sysupgrade=44 MB
       16.  [nfs, nginx-manager, nlbwmon, npc, nps, frpc, frps](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases)
+         - (pending) only tested nginx-manager with [errors](#failed-plugin-luci-app-nginx-manager)
          - Docker本地编译，没有Release
       17.  [ngrokc, nut, olsr, olsr-services, olsr-viz](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.29-2027)
          - factory=30.6 MB, sysupgrade=30.1 MB
@@ -235,6 +237,14 @@
       3. 开始勾选软件包，可以 `Save` 然后对比文件变化。记得记录打开/关闭了什么
       4. 之后需要关闭软件包时，建议恢复原始 `.config` ，然后重新打开其他软件包
 
+### Q&A
+
+1. 更新系统 (sysupgrade) 后， SSH 可连接，但是 luci (管理页面) 打不开?
+   - 输入 `service` 命令查看服务状态，可能是 HTTP 服务器没有运行，可以手动启用和启动
+   - 多见于 `make menuconfig` 时切换是否选择 nginx 。如果启用过 nginx 但后来编译不含 nginx ， uhttpd 并不会自动恢复启用，请自行设置启用和启动。
+2. 添加了不兼容的主题，导致 luci 报错进不去?
+   - 用 nano 或 vi 修改 `/etc/config/luci` ，修改一行为 `option mediaurlbase '/luci-static/argon'` 再刷新页面
+
 ## 原README ↓
 
 ```markdown
@@ -281,7 +291,7 @@
 
 #### 安装后无法使用的插件
 
-1. autorepeater <span id="failed-plugin-luci-app-autorepeater"></span>
+1. luci-app-autorepeater <span id="failed-plugin-luci-app-autorepeater"></span>
 
 ```
 /usr/lib/lua/luci/ucodebridge.lua:23: /usr/lib/lua/luci/template.lua:181: Failed to execute template 'autorepeater/wifi_overview'.
@@ -320,4 +330,62 @@ In [anonymous function](), file /usr/share/ucode/luci/runtime.uc, line 148, byte
  `        return lcall.call(modname, method, ...args);`
   Near here ----------------------------------------^
 ```
+
+2. luci-app-nginx-manager <span id=failed-plugin-luci-app-nginx-manager></span>
+
+```
+/usr/lib/lua/luci/ucodebridge.lua:23: /usr/lib/lua/luci/template.lua:181: Failed to execute template 'cbi/map'.
+A runtime error occurred: /usr/lib/lua/luci/template.lua:181: Failed to execute template 'nginx-manager/index'.
+A runtime error occurred: /usr/lib/lua/luci/template.lua:93: Exception: /usr/lib/lua/luci/ucodebridge.lua:23: /usr/lib/lua/luci/template.lua:158: Failed to load template 'cbi/tabmenu'.
+Error while parsing template '/usr/lib/lua/luci/view/cbi/tabmenu.htm':
+No such file or directory
+
+In error(), file [C]
+called from function run (/usr/lib/lua/luci/ucodebridge.lua:23)
+called from function [anonymous function] (/usr/lib/lua/luci/ucodebridge.lua:37)
+called from function resume ([C])
+called from function [anonymous function] (/usr/lib/lua/luci/ucodebridge.lua:20)
+called from function ((tail call))
+
+In [anonymous function](), file /usr/share/ucode/luci/runtime.uc, line 133, byte 10:
+called from function [arrow function] (/usr/share/ucode/luci/runtime.uc:183:57)
+called from function call ([C])
+called from function [anonymous function] (/usr/share/ucode/luci/runtime.uc:148:45)
+called from function [arrow function] (/usr/share/ucode/luci/dispatcher.uc:813:4)
+called from function render ([C])
+called from function render_action (/usr/share/ucode/luci/dispatcher.uc:787:24)
+called from function run_action (/usr/share/ucode/luci/dispatcher.uc:814:4)
+called from function [anonymous function] (/usr/share/ucode/luci/dispatcher.uc:1027:48)
+called from anonymous function (/www/cgi-bin/luci:39:13)
+
+` die(ex);`
+Near here --------^
+
+stack traceback:
+[C]: in function 'include'
+/usr/lib/lua/luci/template.lua:93: in function 'include'
+[string "/usr/lib/lua/luci/view/nginx-manager/index...."]:1: in main chunk
+stack traceback:
+[C]: in function 'error'
+/usr/lib/lua/luci/template.lua:181: in function
+(tail call): ?
+/usr/lib/lua/luci/cbi.lua:257: in function 'render'
+/usr/lib/lua/luci/cbi.lua:266: in function 'render_children'
+[string "/usr/lib/lua/luci/view/cbi/map.htm"]:6: in main chunk
+
+In error(), file [C]
+called from function [anonymous function] (/usr/lib/lua/luci/ucodebridge.lua:23)
+called from function ((tail call))
+In [anonymous function](), file /usr/share/ucode/luci/runtime.uc, line 148, byte 45:
+  called from function [arrow function] (/usr/share/ucode/luci/dispatcher.uc:813:4)
+  called from function render ([C])
+  called from function render_action (/usr/share/ucode/luci/dispatcher.uc:787:24)
+  called from function run_action (/usr/share/ucode/luci/dispatcher.uc:814:4)
+  called from function [anonymous function] (/usr/share/ucode/luci/dispatcher.uc:1027:48)
+  called from anonymous function (/www/cgi-bin/luci:39:13)
+
+ `        return lcall.call(modname, method, ...args);`
+  Near here ----------------------------------------^
+```
+
 
