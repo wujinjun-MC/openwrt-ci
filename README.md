@@ -132,6 +132,8 @@
       31.  [chatgpt-web, clamav, ddns-go](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases)
          - Docker本地编译，没有Release
          - factory=38 M, sysupgrade=38 M
+      31.  [supervisord](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases)
+         - factory=29.6 MB, sysupgrade=29.2 MB
 2. 将默认uhttpd换成nginx (需要使用[overwrite 1](./overwrite/01-nginx-disable-https) 自动关闭HTTPS)
 
 ### 无法使用
