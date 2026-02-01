@@ -92,6 +92,7 @@
       19.  [pushbot, qbittorrent, qos, ramfree](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.29-2337)
          - factory=43.3 MB, sysupgrade=42.9 MB
       20.  [rclone, rp-pppoe-server](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.30-0915)
+         - [rclone失败](#failed-plugin-luci-app-rclone)
          - factory=53.3 MB, sysupgrade=52.8 MB
       21.  [rustdesk-server, ser2net](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.30-0915)
          - factory=33.1 MB, sysupgrade=32.6 MB
@@ -387,5 +388,40 @@ In [anonymous function](), file /usr/share/ucode/luci/runtime.uc, line 148, byte
  `        return lcall.call(modname, method, ...args);`
   Near here ----------------------------------------^
 ```
+
+3. luci-app-rclone <span id=failed-plugin-luci-app-rclone></span>
+
+```
+/usr/lib/lua/luci/ucodebridge.lua:23: /usr/lib/lua/luci/model/cbi/rclone.lua:4: module 'luci.model.ipkg' not found:
+no field package.preload['luci.model.ipkg']
+no file './luci/model/ipkg.lua'
+no file '/usr/share/lua/luci/model/ipkg.lua'
+no file '/usr/share/lua/luci/model/ipkg/init.lua'
+no file '/usr/lib/lua/luci/model/ipkg.lua'
+no file '/usr/lib/lua/luci/model/ipkg/init.lua'
+no file './luci/model/ipkg.so'
+no file '/usr/lib/lua/luci/model/ipkg.so'
+no file '/usr/lib/lua/loadall.so'
+no file './luci.so'
+no file '/usr/lib/lua/luci.so'
+no file '/usr/lib/lua/loadall.so'
+
+In error(), file [C]
+called from function [anonymous function] (/usr/lib/lua/luci/ucodebridge.lua:23)
+called from function ((tail call))
+In [anonymous function](), file /usr/share/ucode/luci/runtime.uc, line 148, byte 45:
+  called from function [arrow function] (/usr/share/ucode/luci/dispatcher.uc:813:4)
+  called from function render ([C])
+  called from function render_action (/usr/share/ucode/luci/dispatcher.uc:787:24)
+  called from function run_action (/usr/share/ucode/luci/dispatcher.uc:814:4)
+  called from function [anonymous function] (/usr/share/ucode/luci/dispatcher.uc:1027:48)
+  called from anonymous function (/www/cgi-bin/luci:39:13)
+
+ `        return lcall.call(modname, method, ...args);`
+  Near here ----------------------------------------^
+```
+
+
+
 
 
