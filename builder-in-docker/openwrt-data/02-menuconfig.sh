@@ -9,6 +9,6 @@ export SHARED_ENV=$(realpath ./.env)
 
 cd "$OPENWRT_PATH"
 
-make menuconfig # && ( rm -f "$OPENWRT_PATH/flags-downloaded-packages" || true )
+make MENUCONFIG_COLOR=blackbg menuconfig # && ( rm -f "$OPENWRT_PATH/flags-downloaded-packages" || true )
 
 echo "02-menuconfig.sh success"
