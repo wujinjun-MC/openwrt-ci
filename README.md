@@ -52,6 +52,7 @@
       2. [arpbind, autoipsetadder, autoreboot, autorepeater, banip, bcp38, beardropper](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.27-2004)
          - 启动成功
          - [autorepeater失败](#failed-plugin-luci-app-autorepeater)
+         - bcp38: 找不到在哪里
          - factory=30.5 MB, sysupgrade=30 MB
       3. [control-timewol, control-webrestriction, control-weburl, cpufreq, cpulimit, dcwapd](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.27-2201)
          - 启动成功
@@ -91,18 +92,25 @@
          - istoreenhance (KSpeeder): [Runtime error](#failed-plugin-luci-app-istoreenhance)
          - factory=84 MB, sysupgrade=83.5 MB
       11. [kai, ksmbd, ledtrig-rssi, ledtrig-switch](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.02.02-1026)
+         - 启动成功
+         - kai: 实际上是 `酷友社AI`
+         - ledtrig-rssi 和 ledtrig-switch: 在 系统 -> LED 配置
          - factory=67 MB, sysupgrade=66.5 MB
       12. [lldpd, lxc, mac, mfun](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.02.02-1111-21575899723)
+         - 启动成功
+         - mfun: 无法使用 (省略)
          - factory=82 MB, sysupgrade=81.5 MB
       13. [microsocks, minidlna, mjpg-streamer, mosquitto](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.28-2305)
          - 启动成功
          - factory=31.4 MB, sysupgrade=30.8 MB
-      14. [msd_lite, my-dnshelper](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases)
+      14. [msd_lite, my-dnshelper](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.02.02-0249)
+         - 启动成功
          - factory=29.7 MB, sysupgrade=29.2 MB
       15. [natter2, netdata, netspeedtest](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.29-2317)
          - 启动成功
          - factory=44.6 MB, sysupgrade=44 MB
       16.  [nfs, nginx-manager, nlbwmon, npc, nps, frpc, frps](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.02.02-0250)
+         - 启动成功
          - nginx-manager: [errors](#failed-plugin-luci-app-nginx-manager)
             - cause by: [tabmenu.htm not found](https://github.com/sundaqiang/openwrt-packages/issues/5#issuecomment-1074677929)
          - factory=45 MB, sysupgrade=44.5 MB
@@ -129,7 +137,7 @@
       23.  [openclash, openthread, openvpn, openvpn-client, openwisp](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases)
          - Docker本地编译，没有Release
          - factory=39 M, sysupgrade=39 M
-      24.  [oscam, ota, p910nd, packet-capture, pagekitec, partexp, passwall (defaults), pbr](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases)
+      24.  [oscam, ota, p910nd, packet-capture, pagekitec, partexp, passwall2 (defaults), pbr](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases)
          - Docker本地编译，没有Release
          - factory=46 M, sysupgrade=45 M
       25.  [shutdown, smartdns, socat, softether, softethervpn](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.30-2107)
@@ -185,6 +193,20 @@
    2. [luci-proto-pppossh, luci-proto-wireguard, luci-mod-dashboard, luci-mod-istorenext](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.02.02-1110-21575902269)
       - factory=30.2 MB, sysupgrade=29.7 MB
 4. 将默认 APK 包管理器换成 OPKG (可以安装 *.ipk 软件包)
+   1. [apk->opkg, luci-lib-ipkg, luci-nginx, luci-app-{alpha,argone,design}-config, luci-app-nginx-manager, all themes on](about:blank)
+         - Docker本地编译，没有Release
+         - sysupgrade=34.2 MB
+5. Utilities类
+   1. [coap-client, colrm, cpulimit, cpupower, cpusage, dbus-utils, device-observatory, dmesg](about:blank)
+         - coap-client: 一直提示 Not Found ，输入程序路径也不行
+         - cpupower: 不是 Intel CPU ，用不上
+         - device-observatory: 不知道在哪里
+         - Docker本地编译，没有Release
+         - sysupgrade=29.5 MB
+   2. [coreutils](about:blank)
+         - coreutils: 全部打开
+         - Docker本地编译，没有Release
+         - sysupgrade=30.8 MB
 
 ### 无法使用
 1. `ERROR: info field 'version' has invalid value: package version is invalid` (可能因为OpenWRT官方从OPKG换成apk,部分软件包未适配，请耐心等待) (如果急需这些软件包，需要在新增actions run时开启 `fix_version_invalid` / 本地Docker编译时设置 `FIX_VERSION_INVALID=true` 。将会使用overwrite遍历修复版本号(可能会导致其他正常软件包的版本号被修改))
@@ -235,9 +257,16 @@
    1. luci-app-gowebdav: 找不到 `gowebdav`
    2. luci-app-natmap: 找不到 `natmap`
    3. ~~luci-app-webd: 找不到 `webd`~~ (不勾选 `Include webd Binary` 即可)
+   4. libnetconf2 (依赖 by netopeer2-cli, netopeer2-server): 找不到以下依赖
+      ```
+      libmbedcrypto.so.16
+      libmbedtls.so.21
+      libmbedx509.so.7
+      ```
 8. 工具链兼容性 (一般发生在停更的软件包)
    1. n2n (依赖 by luci-app-n2n): `Compatibility with CMake < 3.5 has been removed from CMake`
-   2. scutclient (依赖 by luci-app-scutclient): `Compatibility with CMake < 3.5 has been removed from CMake`
+   2. minisign: `Compatibility with CMake < 3.5 has been removed from CMake`
+   3. scutclient (依赖 by luci-app-scutclient): `Compatibility with CMake < 3.5 has been removed from CMake`
 9. 可能需要更改编译时生成的配置/脚本 (但make过程中不可能实现)
    1. luci-app-nginx-pingos: `./configure: error: the HTTP rewrite module requires the PCRE library. You can either disable the module by using --without-http_rewrite_module option, or install the PCRE library into the system, or build the PCRE library statically from the source with nginx by using --with-pcre=<path> option.`
 10. 导致编译时间过长 / Github Actions 超时
@@ -248,15 +277,15 @@
       4. luci-app-unblockmusic (如果选择 `UnblockNeteaseMusic NodeJS Version`)
       5. luci-app-unblockneteasemusic (这个没有其他选项，必须依赖Node)
       6. luci-app-smartdns (可能是因为 +WebUI)
-      6. luci-app-subconverter
-      99999. ...
+      7. luci-app-subconverter
+      99999.     ...
 11. 体积太大，可能无法刷入
    1. Docker。除了本身，需要docker的软件包如下 (部分)
       1. luci-app-penpot
       2. luci-app-ubuntu
       3. luci-app-ubuntu2
       4. luci-app-wxedge
-      99999. ...
+      99999.     ...
 12. 文件错误
    1. speedtest-web (依赖 by ): `speedtest-web-1.1.5.tar.zst: Wrong hash (probably caused by .gitattributes), expecting 63dad14ce21c78b37f223aacc4fd4611bbe1f9619afff8d52a38186441cb6a86, got aff79406f9050e7ccc04af51458e00e49a90821dd50fb4cc2ab5d7fa7a66f3db`
 

@@ -31,8 +31,8 @@ on:
           - TOKEN_1
           - TOKEN_2
       force_single_thread:
-        description: "强制单线程编译并显示详细输出 (V=s)"
-        default: true
+        description: "强制单线程编译"
+        default: false
         type: boolean
       use_ccache:
         description: "使用 ccache 加速编译"

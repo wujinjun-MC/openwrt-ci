@@ -2,6 +2,7 @@ ls -Al
 cd ~/work/openwrt-ax5-jdc/openwrt-ax5-jdc/openwrt
 make menuconfig
 
+tmux attach
 kill_cpolar
 enter_menuconfig
 rm /tmp/keep-term
