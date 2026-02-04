@@ -316,6 +316,7 @@
       libmbedtls.so.21
       libmbedx509.so.7
       ```
+   5. python-flask-httpauth (依赖 by onionshare-cli): `FileNotFoundError: [Errno 2] No such file or directory: '/home/ubuntu/builder/openwrt/build_dir/target-aarch64_cortex-a53_musl/pypi/Flask-HTTPAuth-4.8.0//openwrt-build/Flask_HTTPAuth-4.8.0-*.whl'`
 8. 工具链兼容性 (一般发生在停更的软件包)
    1. n2n (依赖 by luci-app-n2n): `Compatibility with CMake < 3.5 has been removed from CMake`
    2. minisign: `Compatibility with CMake < 3.5 has been removed from CMake`
@@ -347,6 +348,7 @@
    1. speedtest-web (依赖 by ): `speedtest-web-1.1.5.tar.zst: Wrong hash (probably caused by .gitattributes), expecting 63dad14ce21c78b37f223aacc4fd4611bbe1f9619afff8d52a38186441cb6a86, got aff79406f9050e7ccc04af51458e00e49a90821dd50fb4cc2ab5d7fa7a66f3db`
 13. 未知
    1. libsysrepo (依赖 by sysrepo, sysrepocfg, sysrepoctl)
+   2. supervisor: `make[3]: *** [Makefile:46: /home/wujinjun/git/openwrt-ax5-jdc/builder-in-docker/openwrt-data/builder/openwrt/build_dir/target-aarch64_cortex-a53_musl/pypi/supervisor-python3/supervisor-4.1.0/.built] Error 1`
 
 ### 建议
 
