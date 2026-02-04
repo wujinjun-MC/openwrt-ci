@@ -141,12 +141,16 @@
          - 启动成功
          - factory=58.9 MB, sysupgrade=58.4 MB
       23.  [openclash, openthread, openvpn, openvpn-client, openwisp](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases)
+         - 启动成功
          - openthread: [运行失败](#failed-plugin-luci-app-openthread)
          - Docker本地编译，没有Release
          - sysupgrade=38.1 M
       24.  [ota, p910nd, packet-capture, pagekitec, partexp, passwall2 (defaults), pbr](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases)
+         - 启动成功
+         - ota: 只有一个检查更新按钮，应该是检查官方版更新，此处无意义
+         - p910nd: 不拓展 USB 口并连接打印机则没有作用
          - Docker本地编译，没有Release
-         - factory=46 M, sysupgrade=45 M
+         - sysupgrade=44.1 M
       25.  [shutdown, smartdns, socat, softether, softethervpn](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.30-2107)
          - 启动成功
          - smartdns: 不能勾选WebUI，否则等着超时吧 (Node.JS怪谈)
@@ -249,6 +253,11 @@
          - nssinfo: 退出会卡住，再按一次 `Ctrl-C` 出现 `Segmentation fault`
          - Docker本地编译，没有Release
          - sysupgrade=33.9 MB
+      6. [openssl-util, owipcalc, owut, passh, pax-utils (+ build with support for seccomp), pciids, pciutils, pkgen](about:blank)
+         - 启动成功
+         - pciids, pciutils: 无意义， `lspci` 没有任何输出
+         - Docker本地编译，没有Release
+         - sysupgrade=30.0 MB
    2. 有分类
       1. BitTorrent
          1. [mktorrent, opentracker, qbittorrent-enhanced-edition, rtorrent-rpc](about:blank)
@@ -297,6 +306,7 @@
    2. luci-app-quickstart: `luci-app-quickstart does not support JavaScript source minification`, `luci-app-quickstart does not support CSS source minification`
 4. 冲突
    1. BitTorrent, P2P全开 导致 qbittorrent 安装失败
+   2. "ip{,6}tables-" + "{nft,zz-legacy}" 直接冲突
 5. 看起来编译成功，实际刷入后用不了 (参见 [已测试通过](#已测试通过) 的测试状态)
    1. luci-theme-argone (依赖 by luci-app-argone-config): 设置主题后直接出现luci错误，必须进SSH改回原来主题
    99999. ...

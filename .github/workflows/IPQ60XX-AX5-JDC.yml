@@ -327,7 +327,7 @@ jobs:
 
     - name: Compile Firmware (多线程尝试)
       id: compile
-      if: ${{ !env.FORCE_SINGLE_THREAD }}
+      if: ${{ env.FORCE_SINGLE_THREAD == 'false' }}
       continue-on-error: true # 允许此步失败，以便触发下方的重试逻辑
       run: |
         set -o pipefail
@@ -353,7 +353,7 @@ jobs:
 
     - name: Compile Firmware Single Thread with Verbosity (单线程详细模式)
       id: compile_j1  
-      if: ${{ steps.compile.outputs.status != 'success' || env.FORCE_SINGLE_THREAD }}
+      if: ${{ steps.compile.outputs.status != 'success' || env.FORCE_SINGLE_THREAD =='true' }}
       run: |
         set -o pipefail
         cd $OPENWRT_PATH
