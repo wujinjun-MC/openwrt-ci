@@ -369,7 +369,7 @@ jobs:
       if: always()
       uses: actions/upload-artifact@main
       with:
-        name: compile-log-${{ env.FIRMWARE_TAG }}.log
+        name: compile-log-and-custom_release_notes-${{ env.FIRMWARE_TAG }}.log
         include-hidden-files: true
         path: |
           ${{ env.OPENWRT_PATH }}/build-log.log

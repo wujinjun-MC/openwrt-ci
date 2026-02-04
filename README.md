@@ -75,124 +75,124 @@
          - homeredirect: `权限不足，无法读取 UCI 配置。` 可能因为不兼容新系统
          - Docker本地编译，没有Release
          - factory=36 M, sysupgrade=36 M
-      6. [eqos, eqosplus, example](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.28-1034)
+      7. [eqos, eqosplus, example](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.28-1034)
          - 启动成功
          - 找不到eqosplus?
             - 在 Control -> 定时限速
          - factory=29.9 MB, sysupgrade=29.4 MB
-      7. [fastnet, fchomo, filemanager, fullconenat](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.28-1038)
+      8. [fastnet, fchomo, filemanager, fullconenat](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.28-1038)
          - 启动成功
          - fullconenat
             - 设置为指定 IP 或 全网开启后，仍然显示未运行
             - 原版已经支持此功能，不要重复添加
          - factory=45.6 MB, sysupgrade=45.1 MB
-      8. [fwknopd, gost, guest-wifi, hd-idle](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.29-0253)
+      9. [fwknopd, gost, guest-wifi, hd-idle](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.29-0253)
          - 启动成功
          - guest-wifi: 点击添加后没有反应，而且引起无线设置异常，需要重建
          - factory=38.6 MB, sysupgrade=38.2 MB
-      9. [https-dns-proxy, ikoolproxy](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.28-2316)
+      10. [https-dns-proxy, ikoolproxy](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.28-2316)
          - 启动成功
          - factory=30.8 MB, sysupgrade=30.4 MB
-      10. [internet-detector, iperf3-server, iptvhelper, irqbalance, istoreenhance, istorego](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.29-1836)
+      11. [internet-detector, iperf3-server, iptvhelper, irqbalance, istoreenhance, istorego](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.29-1836)
          - 启动成功
          - istoreenhance (KSpeeder): [Runtime error](#failed-plugin-luci-app-istoreenhance)
          - factory=84 MB, sysupgrade=83.5 MB
-      11. [kai, ksmbd, ledtrig-rssi, ledtrig-switch](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.02.02-1026)
+      12. [kai, ksmbd, ledtrig-rssi, ledtrig-switch](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.02.02-1026)
          - 启动成功
          - kai: 实际上是 `酷友社AI`
          - ledtrig-rssi 和 ledtrig-switch: 在 系统 -> LED 配置
          - factory=67 MB, sysupgrade=66.5 MB
-      12. [lldpd, lxc, mac, mfun](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.02.02-1111-21575899723)
+      13. [lldpd, lxc, mac, mfun](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.02.02-1111-21575899723)
          - 启动成功
          - mfun: 无法使用 (省略)
          - factory=82 MB, sysupgrade=81.5 MB
-      13. [microsocks, minidlna, mjpg-streamer, mosquitto](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.28-2305)
+      14. [microsocks, minidlna, mjpg-streamer, mosquitto](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.28-2305)
          - 启动成功
          - factory=31.4 MB, sysupgrade=30.8 MB
-      14. [msd_lite, my-dnshelper](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.02.02-0249)
+      15. [msd_lite, my-dnshelper](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.02.02-0249)
          - 启动成功
          - factory=29.7 MB, sysupgrade=29.2 MB
-      15. [natter2, netdata, netspeedtest](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.29-2317)
+      16. [natter2, netdata, netspeedtest](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.29-2317)
          - 启动成功
          - factory=44.6 MB, sysupgrade=44 MB
-      16.  [nfs, nginx-manager, nlbwmon, npc, nps, frpc, frps](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.02.02-0250)
+      17.  [nfs, nginx-manager, nlbwmon, npc, nps, frpc, frps](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.02.02-0250)
          - 启动成功
          - nginx-manager: [errors](#failed-plugin-luci-app-nginx-manager)
             - cause by: [tabmenu.htm not found](https://github.com/sundaqiang/openwrt-packages/issues/5#issuecomment-1074677929)
          - factory=45 MB, sysupgrade=44.5 MB
-      17.  [ngrokc, nut, olsr, olsr-services, olsr-viz](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.29-2027)
+      18.  [ngrokc, nut, olsr, olsr-services, olsr-viz](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.29-2027)
          - 启动成功
          - olsr 系列软件包导致进不去管理页面，一直自动跳到 olsr 可视化 (olsr-viz) 页面，必须通过 SSH 删除 `luci-app-olsr` 和所有依赖，重新输入管理页面后才能进入管理页面
          - factory=30.6 MB, sysupgrade=30.1 MB
-      18.  [poweroff, poweroffdevice, privoxy](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.29-2319)
+      19.  [poweroff, poweroffdevice, privoxy](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.29-2319)
          - 启动成功
          - factory=29.8 MB, sysupgrade=29.3 MB
-      19.  [pushbot, qbittorrent, qos, ramfree](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.29-2337)
+      20.  [pushbot, qbittorrent, qos, ramfree](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.29-2337)
          - 启动成功
          - factory=43.3 MB, sysupgrade=42.9 MB
-      20.  [rclone, rp-pppoe-server](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.30-0915)
+      21.  [rclone, rp-pppoe-server](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.30-0915)
          - 启动成功
          - [rclone 失败](#failed-plugin-luci-app-rclone)，需要补充 `luci-lib-ipkg`
          - factory=53.3 MB, sysupgrade=52.8 MB
-      21.  [rustdesk-server, ser2net](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.30-0915)
+      22.  [rustdesk-server, ser2net](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.30-0915)
          - 启动成功
          - factory=33.1 MB, sysupgrade=32.6 MB
-      22.  [spotifyd, squid, sshtunnel, ssr-mudb-server, ssr-plus (defaults)](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.30-0256)
+      23.  [spotifyd, squid, sshtunnel, ssr-mudb-server, ssr-plus (defaults)](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.30-0256)
          - 启动成功
          - factory=58.9 MB, sysupgrade=58.4 MB
-      23.  [openclash, openthread, openvpn, openvpn-client, openwisp](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases)
+      24.  [openclash, openthread, openvpn, openvpn-client, openwisp](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases)
          - 启动成功
          - openthread: [运行失败](#failed-plugin-luci-app-openthread)
          - Docker本地编译，没有Release
          - sysupgrade=38.1 M
-      24.  [ota, p910nd, packet-capture, pagekitec, partexp, passwall2 (defaults), pbr](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases)
+      25.  [ota, p910nd, packet-capture, pagekitec, partexp, passwall2 (defaults), pbr](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases)
          - 启动成功
          - ota: 只有一个检查更新按钮，应该是检查官方版更新，此处无意义
          - p910nd: 不拓展 USB 口并连接打印机则没有作用
          - Docker本地编译，没有Release
          - sysupgrade=44.1 M
-      25.  [shutdown, smartdns, socat, softether, softethervpn](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.30-2107)
+      26.  [shutdown, smartdns, socat, softether, softethervpn](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.30-2107)
          - 启动成功
          - smartdns: 不能勾选WebUI，否则等着超时吧 (Node.JS怪谈)
          - factory=34.3 MB, sysupgrade=33.8 MB
-      26.  [tailscale-community, taskplan, tcpdump, timecontrol, timewol, tinyfilemanager](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases)
+      27.  [tailscale-community, taskplan, tcpdump, timecontrol, timewol, tinyfilemanager](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases)
          - Docker本地编译，没有Release
          - factory=44 M, sysupgrade=43 M
-      27.  [tinyproxy, tor, travelmate, transmission, ua2f, udp2raw, udpxy, unblockmusic](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases)
+      28.  [tinyproxy, tor, travelmate, transmission, ua2f, udp2raw, udpxy, unblockmusic](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases)
          - unblockmusic: 需要选择 `UnblockNeteaseMusic Golang Version`
          - Docker本地编译，没有Release
          - factory=36 M, sysupgrade=36 M
-      28.  [unbound](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.30-1734)
+      29.  [unbound](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.30-1734)
          - 启动成功，可进入软件界面
          - factory=30.2 MB, sysupgrade=29.7 MB
-      29.  [usteer, v2raya, vlmcsd, vnstat2, vsftpd](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.30-1514)
+      30.  [usteer, v2raya, vlmcsd, vnstat2, vsftpd](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.30-1514)
          - 启动成功
          - factory=47 MB, sysupgrade=46.5 MB
-      30.  [watchcat, watchdog, webd, webdav, webviewdev](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases)
+      31.  [watchcat, watchdog, webd, webdav, webviewdev](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases)
          - webd: 取消勾选 `Include webd Binary`
          - Docker本地编译，没有Release
          - factory=32 M, sysupgrade=31 M
-      31.  [wechatpush, wifischedule, wizard, wol, wolplus](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases)
+      32.  [wechatpush, wifischedule, wizard, wol, wolplus](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases)
          - wechatpush: 勾选全部附加项
          - Docker本地编译，没有Release
          - factory=32 M, sysupgrade=32 M
-      32.  [wrtbwmon, xfrpc, xinetd](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.31-0221)
-         - 启动成功，可进入软件界面
+      33.  [wrtbwmon, xfrpc, xinetd](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.01.31-0221)
+         - 启动成功
          - factory=29.9 MB, sysupgrade=29.4 MB
-      33.  [luci-app-zerotier, luci-themedog](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases)
+      34.  [luci-app-zerotier, luci-themedog](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases)
          - 不省略 `luci-app-` 开头，因为不以 `luci-app-` 开头
          - Docker本地编译，没有Release
          - factory=31 M, sysupgrade=30 M
-      34.  [chatgpt-web, clamav, ddns-go](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases)
+      35.  [chatgpt-web, clamav, ddns-go](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases)
          - Docker本地编译，没有Release
          - factory=38 M, sysupgrade=38 M
-      35.  [supervisord](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.02.01-0124)
+      36.  [supervisord](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.02.01-0124)
          - 启动成功
          - 为什么显示 `Supervisord 未运行`
             - 来自 [项目说明](https://github.com/sundaqiang/openwrt-packages/tree/master/luci-app-nginx-manager):
                - > 插件没附带二进制文件，第一次使用需要直接点按钮更新。如果更新失败，自行去项目下载二进制文件。
          - factory=29.6 MB, sysupgrade=29.2 MB
-      36.  [statistics, supervisord](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.02.01-1107)
+      37.  [statistics, supervisord](https://github.com/wujinjun-MC/openwrt-ax5-jdc/releases/tag/IPQ60XX-AX5-JDC-6.12-2026.02.01-1107)
          - 启动成功
          - factory=29.9 MB, sysupgrade=29.4 MB
 2. 将默认uhttpd换成nginx (需要使用[overwrite 1](./overwrite/01-nginx-disable-https) 自动关闭HTTPS)
@@ -269,6 +269,12 @@
             - 启动成功
             - Docker本地编译，没有Release
             - sysupgrade=31.9 MB
+      2. File Transfer
+         1. [aria2, atftp, atftpd, croc, curl, rclone, rclone-config, rrsync (requires Languages->Python->python3-light), rsync (+ Enable lz4, extremely fast compression, + Enable xxhash, extremely fast hash), rsyncd, transfer, unishare, vsftpd](about:blank)
+            - 启动成功
+            - 包括: LuCI->Applications->[luci-app-rclone, luci-app-unishare, luci-app-vsftpd]
+            - Docker本地编译，没有Release
+            - sysupgrade=73.2 MB
 
 ### 无法使用
 1. `ERROR: info field 'version' has invalid value: package version is invalid` (可能因为OpenWRT官方从OPKG换成apk,部分软件包未适配，请耐心等待) (如果急需这些软件包，需要在新增actions run时开启 `fix_version_invalid` / 本地Docker编译时设置 `FIX_VERSION_INVALID=true` 。将会使用overwrite遍历修复版本号(可能会导致其他正常软件包的版本号被修改))
@@ -428,6 +434,10 @@
 
 #### 安装后无法使用的插件
 
+##### 缺失依赖
+
+###### luci.model.ipkg
+
 1. luci-app-autorepeater <span id="failed-plugin-luci-app-autorepeater"></span>
 
 ```
@@ -468,7 +478,86 @@ In [anonymous function](), file /usr/share/ucode/luci/runtime.uc, line 148, byte
   Near here ----------------------------------------^
 ```
 
-2. luci-app-nginx-manager <span id=failed-plugin-luci-app-nginx-manager></span>
+2. luci-app-rclone <span id=failed-plugin-luci-app-rclone></span>
+
+```
+/usr/lib/lua/luci/ucodebridge.lua:23: /usr/lib/lua/luci/model/cbi/rclone.lua:4: module 'luci.model.ipkg' not found:
+no field package.preload['luci.model.ipkg']
+no file './luci/model/ipkg.lua'
+no file '/usr/share/lua/luci/model/ipkg.lua'
+no file '/usr/share/lua/luci/model/ipkg/init.lua'
+no file '/usr/lib/lua/luci/model/ipkg.lua'
+no file '/usr/lib/lua/luci/model/ipkg/init.lua'
+no file './luci/model/ipkg.so'
+no file '/usr/lib/lua/luci/model/ipkg.so'
+no file '/usr/lib/lua/loadall.so'
+no file './luci.so'
+no file '/usr/lib/lua/luci.so'
+no file '/usr/lib/lua/loadall.so'
+
+In error(), file [C]
+called from function [anonymous function] (/usr/lib/lua/luci/ucodebridge.lua:23)
+called from function ((tail call))
+In [anonymous function](), file /usr/share/ucode/luci/runtime.uc, line 148, byte 45:
+  called from function [arrow function] (/usr/share/ucode/luci/dispatcher.uc:813:4)
+  called from function render ([C])
+  called from function render_action (/usr/share/ucode/luci/dispatcher.uc:787:24)
+  called from function run_action (/usr/share/ucode/luci/dispatcher.uc:814:4)
+  called from function [anonymous function] (/usr/share/ucode/luci/dispatcher.uc:1027:48)
+  called from anonymous function (/www/cgi-bin/luci:39:13)
+
+ `        return lcall.call(modname, method, ...args);`
+  Near here ----------------------------------------^
+```
+
+###### attempt to index local 'obj' (a nil value)
+
+1. luci-app-istoreenhance <span id=failed-plugin-luci-app-istoreenhance></span>
+
+```
+/usr/lib/lua/luci/ucodebridge.lua:23: /usr/lib/lua/luci/model/istoreenhance.lua:13: attempt to index local 'obj' (a nil value)
+
+In error(), file [C]
+called from function [anonymous function] (/usr/lib/lua/luci/ucodebridge.lua:23)
+called from function ((tail call))
+In [anonymous function](), file /usr/share/ucode/luci/runtime.uc, line 148, byte 45:
+  called from function [arrow function] (/usr/share/ucode/luci/dispatcher.uc:813:4)
+  called from function render ([C])
+  called from function render_action (/usr/share/ucode/luci/dispatcher.uc:787:24)
+  called from function run_action (/usr/share/ucode/luci/dispatcher.uc:814:4)
+  called from function [anonymous function] (/usr/share/ucode/luci/dispatcher.uc:1027:48)
+  called from anonymous function (/www/cgi-bin/luci:39:13)
+
+ `        return lcall.call(modname, method, ...args);`
+  Near here ----------------------------------------^
+```
+
+2. luci-app-openthread <span id=failed-plugin-luci-app-openthread></span>
+
+```
+/usr/lib/lua/luci/ucodebridge.lua:23: /usr/lib/lua/luci/template.lua:181: Failed to execute template 'admin_thread/thread_overview'.
+A runtime error occurred: [string "/usr/lib/lua/luci/view/admin_thread/thread_..."]:24: attempt to index a nil value
+stack traceback:
+[string "/usr/lib/lua/luci/view/admin_thread/thread_..."]:24: in main chunk
+
+In error(), file [C]
+called from function [anonymous function] (/usr/lib/lua/luci/ucodebridge.lua:23)
+called from function ((tail call))
+In [anonymous function](), file /usr/share/ucode/luci/runtime.uc, line 148, byte 45:
+  called from function [arrow function] (/usr/share/ucode/luci/dispatcher.uc:800:71)
+  called from function render ([C])
+  called from function render_action (/usr/share/ucode/luci/dispatcher.uc:787:24)
+  called from function run_action (/usr/share/ucode/luci/dispatcher.uc:801:5)
+  called from function [anonymous function] (/usr/share/ucode/luci/dispatcher.uc:1027:48)
+  called from anonymous function (/www/cgi-bin/luci:39:13)
+
+ `        return lcall.call(modname, method, ...args);`
+  Near here ----------------------------------------^
+```
+
+###### 其他
+
+1. luci-app-nginx-manager <span id=failed-plugin-luci-app-nginx-manager></span>
 
 ```
 /usr/lib/lua/luci/ucodebridge.lua:23: /usr/lib/lua/luci/template.lua:181: Failed to execute template 'cbi/map'.
@@ -524,82 +613,6 @@ In [anonymous function](), file /usr/share/ucode/luci/runtime.uc, line 148, byte
  `        return lcall.call(modname, method, ...args);`
   Near here ----------------------------------------^
 ```
-
-3. luci-app-rclone <span id=failed-plugin-luci-app-rclone></span>
-
-```
-/usr/lib/lua/luci/ucodebridge.lua:23: /usr/lib/lua/luci/model/cbi/rclone.lua:4: module 'luci.model.ipkg' not found:
-no field package.preload['luci.model.ipkg']
-no file './luci/model/ipkg.lua'
-no file '/usr/share/lua/luci/model/ipkg.lua'
-no file '/usr/share/lua/luci/model/ipkg/init.lua'
-no file '/usr/lib/lua/luci/model/ipkg.lua'
-no file '/usr/lib/lua/luci/model/ipkg/init.lua'
-no file './luci/model/ipkg.so'
-no file '/usr/lib/lua/luci/model/ipkg.so'
-no file '/usr/lib/lua/loadall.so'
-no file './luci.so'
-no file '/usr/lib/lua/luci.so'
-no file '/usr/lib/lua/loadall.so'
-
-In error(), file [C]
-called from function [anonymous function] (/usr/lib/lua/luci/ucodebridge.lua:23)
-called from function ((tail call))
-In [anonymous function](), file /usr/share/ucode/luci/runtime.uc, line 148, byte 45:
-  called from function [arrow function] (/usr/share/ucode/luci/dispatcher.uc:813:4)
-  called from function render ([C])
-  called from function render_action (/usr/share/ucode/luci/dispatcher.uc:787:24)
-  called from function run_action (/usr/share/ucode/luci/dispatcher.uc:814:4)
-  called from function [anonymous function] (/usr/share/ucode/luci/dispatcher.uc:1027:48)
-  called from anonymous function (/www/cgi-bin/luci:39:13)
-
- `        return lcall.call(modname, method, ...args);`
-  Near here ----------------------------------------^
-```
-
-4. luci-app-istoreenhance <span id=failed-plugin-luci-app-istoreenhance></span>
-
-```
-/usr/lib/lua/luci/ucodebridge.lua:23: /usr/lib/lua/luci/model/istoreenhance.lua:13: attempt to index local 'obj' (a nil value)
-
-In error(), file [C]
-called from function [anonymous function] (/usr/lib/lua/luci/ucodebridge.lua:23)
-called from function ((tail call))
-In [anonymous function](), file /usr/share/ucode/luci/runtime.uc, line 148, byte 45:
-  called from function [arrow function] (/usr/share/ucode/luci/dispatcher.uc:813:4)
-  called from function render ([C])
-  called from function render_action (/usr/share/ucode/luci/dispatcher.uc:787:24)
-  called from function run_action (/usr/share/ucode/luci/dispatcher.uc:814:4)
-  called from function [anonymous function] (/usr/share/ucode/luci/dispatcher.uc:1027:48)
-  called from anonymous function (/www/cgi-bin/luci:39:13)
-
- `        return lcall.call(modname, method, ...args);`
-  Near here ----------------------------------------^
-```
-
-5. luci-app-openthread <span id=failed-plugin-luci-app-openthread></span>
-
-```
-/usr/lib/lua/luci/ucodebridge.lua:23: /usr/lib/lua/luci/template.lua:181: Failed to execute template 'admin_thread/thread_overview'.
-A runtime error occurred: [string "/usr/lib/lua/luci/view/admin_thread/thread_..."]:24: attempt to index a nil value
-stack traceback:
-[string "/usr/lib/lua/luci/view/admin_thread/thread_..."]:24: in main chunk
-
-In error(), file [C]
-called from function [anonymous function] (/usr/lib/lua/luci/ucodebridge.lua:23)
-called from function ((tail call))
-In [anonymous function](), file /usr/share/ucode/luci/runtime.uc, line 148, byte 45:
-  called from function [arrow function] (/usr/share/ucode/luci/dispatcher.uc:800:71)
-  called from function render ([C])
-  called from function render_action (/usr/share/ucode/luci/dispatcher.uc:787:24)
-  called from function run_action (/usr/share/ucode/luci/dispatcher.uc:801:5)
-  called from function [anonymous function] (/usr/share/ucode/luci/dispatcher.uc:1027:48)
-  called from anonymous function (/www/cgi-bin/luci:39:13)
-
- `        return lcall.call(modname, method, ...args);`
-  Near here ----------------------------------------^
-```
-
 
 
 
