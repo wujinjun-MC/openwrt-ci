@@ -312,19 +312,6 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-openwrt-ccache-
 
-    # --- 缓存 staging_dir (分层) ---
-    - name: Cache staging_dir (调取 staging_dir 缓存)
-      id: staging_dir-restore
-      if: always()
-      uses: actions/cache@v4
-      with:
-        path: ${{ env.OPENWRT_PATH }}/staging_dir
-        # 关键：hashFiles 确保了配置一旦修改，就会寻找新的缓存或重新建立缓存
-        #key: ${{ runner.os }}-openwrt-ccache-${{ hashFiles('openwrt/.config') }}
-        key: ${{ runner.os }}-openwrt-staging_dir-default
-        restore-keys: |
-          ${{ runner.os }}-openwrt-staging_dir-
-
     - name: Compile Firmware (多线程尝试)
       id: compile
       if: ${{ env.FORCE_SINGLE_THREAD == 'false' }}
