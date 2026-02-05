@@ -365,6 +365,9 @@
 4. 冲突
    1. BitTorrent, P2P全开 导致 qbittorrent 安装失败
    2. "ip{,6}tables-" + "{nft,zz-legacy}" 直接冲突
+   3. "缺失" `libicui18n.so.78`, `libicuuc.so.78` (samba4-libs):
+      - 实际上是开启了一些软件包导致的冲突
+      - 这台机子没必要开启 samba4 共享，可以用 ksmbd 代替
 5. 看起来编译成功，实际刷入后用不了 (参见 [已测试通过](#已测试通过) 的测试状态)
    1. luci-theme-argone (依赖 by luci-app-argone-config): 设置主题后直接出现luci错误，必须进SSH改回原来主题
    99999. ...
