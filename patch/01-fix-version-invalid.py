@@ -2,10 +2,9 @@ import re
 import os
 import argparse
 
-# 匹配 PKG_VERSION 和 PKG_RELEASE 的正则
-PKG_VER_RE = re.compile(r'^(PKG_VERSION\s*:=?\s*)(.*)$')
-PKG_REL_RE = re.compile(r'^(PKG_RELEASE\s*:=?\s*)(.*)$')
-# VAR_DEF_RE = re.compile(r'^([A-Z0-9_]+)\s*[:?]?=\s*(.*)$')
+# 匹配 PKG_VERSION 和 PKG_RELEASE 的正则 (支持 :=, =, ?=)
+PKG_VER_RE = re.compile(r'^(PKG_VERSION\s*[:?]?=\s*)(.*)$')
+PKG_REL_RE = re.compile(r'^(PKG_RELEASE\s*[:?]?=\s*)(.*)$')
 
 def is_variable(val):
     """检测是否为 Makefile 变量，例如 ~~$(AUTO_RELEASE) 或~~ ${VERSION}"""
@@ -102,7 +101,7 @@ def process_file(filepath, apply_changes=False):
                     file_changed = True
                 elif old_val_s:
                     # 普通字符串执行合规化
-                    new_val = sanitize_apk_version(old_val_s)
+                    new_val = sanitize_apk_version(old_val_s).replace('.','')
                     if old_val_s != new_val:
                         print(f"[RELEASE] {filepath}: '{old_val_s}' -> '{new_val}'")
                         line = f"{prefix}{new_val}"
