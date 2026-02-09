@@ -1,3 +1,19 @@
+#!/bin/bash
+
+# 修改默认IP
+sed -i 's/192.168.1.1/192.168.4.1/g' package/base-files/files/bin/config_generate
+
 rm -rf package/emortal/luci-app-athena-led
+rm -rf package/luci/applications/luci-app-lucky
+
 git clone --depth=1 https://github.com/NONGFAH/luci-app-athena-led package/luci-app-athena-led
 chmod +x package/luci-app-athena-led/root/etc/init.d/athena_led package/luci-app-athena-led/root/usr/sbin/athena-led
+
+# Lucky
+git clone --depth=1 https://github.com/gdy666/luci-app-lucky.git package/lucky
+
+# AdGuard Home
+git clone --depth=1 https://github.com/rufengsuixing/luci-app-adguardhome package/luci-app-adguardhome
+
+# Tailscale (community)
+git clone --depth=1 https://github.com/tokisaki-galaxy/luci-app-tailscale-community package/luci-app-tailscale-community
