@@ -407,7 +407,7 @@ jobs:
         rm -rf packages feeds.buildinfo version.buildinfo
         echo "FIRMWARE_PATH=$PWD" >> $GITHUB_ENV
         # Read custom message which will be displayed in release notes
-        [ -e "$OPENWRT_PATH/custom_release_notes.txt" ] && echo "CUSTOM_RELEASE_NOTES=$(sed ':a;N;$!ba;s/\n/\n          /g' $OPENWRT_PATH/custom_release_notes.txt)" >> $GITHUB_ENV && cp "$OPENWRT_PATH/custom_release_notes.txt" ./
+        [ -e "$OPENWRT_PATH/custom_release_notes.txt" ] && echo "CUSTOM_RELEASE_NOTES=$(sed ':a;N;$!ba;s/\n/<br\/>/g' $OPENWRT_PATH/custom_release_notes.txt)" >> $GITHUB_ENV && cp "$OPENWRT_PATH/custom_release_notes.txt" ./
         exit 0
 
     - name: Upload Firmware To Artifact(将固件上传到Artifact)
