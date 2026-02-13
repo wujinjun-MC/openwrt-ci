@@ -340,7 +340,7 @@ jobs:
 
     - name: Compile Firmware Single Thread with Verbosity (单线程详细模式)
       id: compile_j1  
-      if: ${{ steps.compile.outputs.status != 'success' || env.FORCE_SINGLE_THREAD =='true' }}
+      if: ${{ env.FORCE_SINGLE_THREAD == 'true' }}
       run: |
         set -o pipefail
         cd $OPENWRT_PATH
