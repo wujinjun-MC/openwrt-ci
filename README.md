@@ -44,9 +44,52 @@
 
 - AX5-JDC: 具体查看 old-ax5-jdc 分支
 
+- nn6000:
+   1. 大杂烩 (why = AX5-JDC 已经积累很多可用软件包，而且 nn6000 系统分区 2G 远大于 AX5-JDC's 128M)
+      1. 
+
 ### 无法使用
 
 - AX5-JDC: 具体查看 old-ax5-jdc 分支
+
+- nn6000:
+   1. 冲突
+      1. `wifidog` and `apfree-wifidog`:
+         - log: `ERROR: wifidog-1.3.0-r9: trying to overwrite etc/wifidog-msg.html owned by apfree-wifidog-7.10.2082-r1.`
+         - prefer: `apfree-wifidog`
+      2. `libmicrohttpd-ssl-1.0.2-r1` (依赖 by `gnunet`) and `libmicrohttpd-no-ssl-1.0.2-r1` (依赖 by `nodogsplash`):
+         - log:
+            ```
+            ERROR: unable to select packages:
+            libmicrohttpd-ssl-1.0.2-r1:
+               conflicts: libmicrohttpd-no-ssl-1.0.2-r1[libmicrohttpd=1.0.2-r1]
+               satisfies: world[libmicrohttpd-ssl]
+                           gnunet-hostlist-0.25.1-r2[libmicrohttpd-ssl]
+            libmicrohttpd-no-ssl-1.0.2-r1:
+               conflicts: libmicrohttpd-ssl-1.0.2-r1[libmicrohttpd=1.0.2-r1]
+               satisfies: world[libmicrohttpd-no-ssl]
+                           nodogsplash-5.0.2-r1[libmicrohttpd-no-ssl]
+            make[2]: *** [package/Makefile:100: package/install] Error 4
+            ```
+      3. `luci-app-fileassistant` and `luci-app-advanced`
+         - log:
+            ```
+            ERROR: luci-app-fileassistant-1.0-r8: trying to overwrite usr/lib/lua/luci/controller/fileassistant.lua owned by luci-app-advanced-1.20-r20220218.
+            ERROR: luci-app-fileassistant-1.0-r8: trying to overwrite usr/lib/lua/luci/view/fileassistant.htm owned by luci-app-advanced-1.20-r20220218.
+            ERROR: luci-app-fileassistant-1.0-r8: trying to overwrite www/luci-static/resources/fileassistant/fb.css owned by luci-app-advanced-1.20-r20220218.
+            ERROR: luci-app-fileassistant-1.0-r8: trying to overwrite www/luci-static/resources/fileassistant/fb.js owned by luci-app-advanced-1.20-r20220218.
+            ERROR: luci-app-fileassistant-1.0-r8: trying to overwrite www/luci-static/resources/fileassistant/file-icon.png owned by luci-app-advanced-1.20-r20220218.
+            ERROR: luci-app-fileassistant-1.0-r8: trying to overwrite www/luci-static/resources/fileassistant/folder-icon.png owned by luci-app-advanced-1.20-r20220218.
+            ERROR: luci-app-fileassistant-1.0-r8: trying to overwrite www/luci-static/resources/fileassistant/link-icon.png owned by luci-app-advanced-1.20-r20220218.
+            ```
+   2. 源码有 bug
+      1. `bwm-ng`:
+         ```
+         output.c: In function 'print_header':
+         output.c:154:13: error: format not a string literal and no format arguments [-Werror=format-security]
+         154 |             wprintw(stdscr,show_all_if2str());
+               |             ^~~~~~~
+         ```
 
 ### 建议
 
