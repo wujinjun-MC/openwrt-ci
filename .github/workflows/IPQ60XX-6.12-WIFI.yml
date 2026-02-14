@@ -79,12 +79,6 @@ jobs:
         sudo timedatectl set-timezone "$TZ"
         printf "TIMESTAMP_START=%(%s)T" >> $GITHUB_ENV
 
-    # 1. 在初始化环境前，如果选择了 debug 模式，先启动隧道（非阻塞模式）
-    - name: Remote debug (Startup)
-      if: env.CPOLAR == 'debug'
-      shell: bash
-      run: bash ${GITHUB_WORKSPACE}/debug-via-reverse-proxy.sh nonblock
-
     - name: Check Server Performance(检查服务器性能)
       run: |
         echo "警告⚠"
@@ -126,6 +120,12 @@ jobs:
 
     - name: Checkout
       uses: actions/checkout@main
+
+    # 1. 如果选择了 debug 模式，先启动隧道（非阻塞模式）
+    - name: Remote debug (Startup)
+      if: env.CPOLAR == 'debug'
+      shell: bash
+      run: bash ${GITHUB_WORKSPACE}/debug-via-reverse-proxy.sh nonblock
 
     - name: Print disk usage 1
       if: always()
@@ -417,44 +417,91 @@ jobs:
         name: ${{ env.SOURCE_REPO }}-firmware-${{ env.DEVICE_TARGET }}-${{ env.DEVICE_SUBTARGET }}-${{ env.FILE_DATE }}
         path: ${{ env.FIRMWARE_PATH }}
 
-    - name: Upload Firmware To Release(发布固件)
-      if: env.FIRMWARE_RELEASE == 'true'
-      uses: ncipollo/release-action@v1
+    - name: 生成发布标签
+      id: tag
+      if: env.FIRMWARE_RELEASE == 'true' && !cancelled()
+      run: |
+        echo "**This is OpenWrt Firmware for (IPQ60XX-nn6000-6.12-WIFI)**" >> release.txt
+        echo "### Builder信息" >> release.txt
+        echo "- 🔗 源码版本: [${{ env.SHORT_COMMIT_BUILDER }}](${{ env.REPO_URL_BUILDER }}/commit/${{ env.COMMIT_HASH_BUILDER }})" >> release.txt
+        echo "- 🚀 本次运行 Workflow: [#${{ github.run_number }} (${{ github.run_id }})](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})" >> release.txt
+        echo "- 🛠️ workflow 定义文件: [${{ github.workflow }}](${{ github.server_url }}/${{ github.repository }}/blob/${{ github.ref_name }}/.github/workflows/IPQ60XX-6.12-WIFI.yml)" >> release.txt
+        echo "- ⚙️ 编译模式: ${{ env.FORCE_SINGLE_THREAD == 'true' && '强制单线程' || '自动多线程' }}" >> release.txt
+        echo "- ⚙️ 编译缓存: ${{ env.ENABLED_CCACHE == 'true' && '已启用' || '已禁用' }}" >> release.txt
+        echo "### 📒 固件信息(WIFI)" >> release.txt
+        echo "- 带WIFI带有线NSS的6.12内核固件" >> release.txt
+        echo "- 💻 这是 (IPQ60XX-nn6000-6.12-WIFI) 平台使用的 OpenWrt 固件" >> release.txt
+        echo "- ⚽ 固件源码: ${{ env.REPO_URL }}" >> release.txt
+        echo "- 💝 源码分支: ${{ env.REPO_BRANCH }}" >> release.txt
+        echo "- 🔗 源码版本: [${{ env.SHORT_COMMIT }}](${{ env.REPO_URL }}/commit/${{ env.COMMIT_HASH }})" >> release.txt
+        echo "- 🛠️ 编译模式: ${{ inputs.force_single_thread == 'true' && '强制单线程' || '多线程，失败后单线程' }}" >> release.txt
+        echo "- 🌐 默认地址: 192.168.31.1" >> release.txt
+        echo "- 🔑 默认密码: password" >> release.txt
+        echo "### 🧊 固件版本" >> release.txt
+        echo "- 固件内核版本：${{ env.VERSION_KERNEL }}" >> release.txt
+        echo "- 固件编译前最后一次➦[主源码](${{ env.REPO_URL }})更新记录:" >> release.txt
+        echo "  - ${{ env.VERSION_INFO }}" >> release.txt
+        if [ -e "$OPENWRT_PATH/custom_release_notes.txt" ]; then
+          echo "### 自定义发布信息" >> release.txt
+          echo "<details>" >> release.txt
+          echo >> release.txt
+
+          echo "<summary>点击展开</summary>" >> release.txt
+          echo >> release.txt
+
+          cat "$OPENWRT_PATH/custom_release_notes.txt" >> release.txt
+          echo >> release.txt
+
+          echo "</details>" >> release.txt
+        fi
+        echo "status=success" >> $GITHUB_OUTPUT
+
+    - name: 上传固件到发布
+      uses: softprops/action-gh-release@master
+      if: steps.tag.outputs.status == 'success' && !cancelled()
       with:
-        name: R${{ env.DATE }} for ${{ env.FIRMWARE_TAG }}
-        allowUpdates: true
-        tag: ${{ env.FIRMWARE_TAG }} # 使用带日期的时间戳 Tag
-        token: ${{ secrets.GITHUB_TOKEN }}
-        artifacts: ${{ env.FIRMWARE_PATH }}/*
-        body: |
-          **This is OpenWrt Firmware for (IPQ60XX-nn6000-6.12-WIFI)**
-          ### Builder信息
-          - 🔗 源码版本: [${{ env.SHORT_COMMIT_BUILDER }}](${{ env.REPO_URL_BUILDER }}/commit/${{ env.COMMIT_HASH_BUILDER }})
-          - 🚀 本次运行 Workflow: [#${{ github.run_number }} (${{ github.run_id }})](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
-          - 🛠️ workflow 定义文件: [${{ github.workflow }}](${{ github.server_url }}/${{ github.repository }}/blob/${{ github.ref_name }}/.github/workflows/IPQ60XX-6.12-WIFI.yml)
-          - ⚙️ 编译模式: ${{ env.FORCE_SINGLE_THREAD == 'true' && '强制单线程' || '自动多线程' }}
-          - ⚙️ 编译缓存: ${{ env.ENABLED_CCACHE == 'true' && '已启用' || '已禁用' }}
-          ### 📒 固件信息(WIFI)
-          - 带WIFI带有线NSS的6.12内核固件
-          - 💻 这是 (IPQ60XX-nn6000-6.12-WIFI) 平台使用的 OpenWrt 固件
-          - ⚽ 固件源码: ${{ env.REPO_URL }}
-          - 💝 源码分支: ${{ env.REPO_BRANCH }}
-          - 🔗 源码版本: [${{ env.SHORT_COMMIT }}](${{ env.REPO_URL }}/commit/${{ env.COMMIT_HASH }})
-          - 🛠️ 编译模式: ${{ inputs.force_single_thread == 'true' && '强制单线程' || '多线程，失败后单线程' }}
-          - 🌐 默认地址: 192.168.31.1
-          - 🔑 默认密码: password
-          ### 🧊 固件版本
-          - 固件内核版本：${{ env.VERSION_KERNEL }}
-          - 固件编译前最后一次➦[主源码](${{ env.REPO_URL }})更新记录:
-            - ${{ env.VERSION_INFO }}
-          ### 自定义发布信息
-          <details>
+        tag_name: ${{ env.FIRMWARE_TAG }} # 使用带日期的时间戳 Tag
+        body_path: release.txt
+        files: ${{ env.FIRMWARE_PATH }}/*
 
-          <summary>点击展开</summary>
+    # - name: Upload Firmware To Release(发布固件)
+    #   if: env.FIRMWARE_RELEASE == 'true'
+    #   uses: ncipollo/release-action@v1
+    #   with:
+    #     name: R${{ env.DATE }} for ${{ env.FIRMWARE_TAG }}
+    #     allowUpdates: true
+    #     tag: ${{ env.FIRMWARE_TAG }} # 使用带日期的时间戳 Tag
+    #     token: ${{ secrets.GITHUB_TOKEN }}
+    #     artifacts: ${{ env.FIRMWARE_PATH }}/*
+    #     body: |
+    #       **This is OpenWrt Firmware for (IPQ60XX-nn6000-6.12-WIFI)**
+    #       ### Builder信息
+    #       - 🔗 源码版本: [${{ env.SHORT_COMMIT_BUILDER }}](${{ env.REPO_URL_BUILDER }}/commit/${{ env.COMMIT_HASH_BUILDER }})
+    #       - 🚀 本次运行 Workflow: [#${{ github.run_number }} (${{ github.run_id }})](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+    #       - 🛠️ workflow 定义文件: [${{ github.workflow }}](${{ github.server_url }}/${{ github.repository }}/blob/${{ github.ref_name }}/.github/workflows/IPQ60XX-6.12-WIFI.yml)
+    #       - ⚙️ 编译模式: ${{ env.FORCE_SINGLE_THREAD == 'true' && '强制单线程' || '自动多线程' }}
+    #       - ⚙️ 编译缓存: ${{ env.ENABLED_CCACHE == 'true' && '已启用' || '已禁用' }}
+    #       ### 📒 固件信息(WIFI)
+    #       - 带WIFI带有线NSS的6.12内核固件
+    #       - 💻 这是 (IPQ60XX-nn6000-6.12-WIFI) 平台使用的 OpenWrt 固件
+    #       - ⚽ 固件源码: ${{ env.REPO_URL }}
+    #       - 💝 源码分支: ${{ env.REPO_BRANCH }}
+    #       - 🔗 源码版本: [${{ env.SHORT_COMMIT }}](${{ env.REPO_URL }}/commit/${{ env.COMMIT_HASH }})
+    #       - 🛠️ 编译模式: ${{ inputs.force_single_thread == 'true' && '强制单线程' || '多线程，失败后单线程' }}
+    #       - 🌐 默认地址: 192.168.31.1
+    #       - 🔑 默认密码: password
+    #       ### 🧊 固件版本
+    #       - 固件内核版本：${{ env.VERSION_KERNEL }}
+    #       - 固件编译前最后一次➦[主源码](${{ env.REPO_URL }})更新记录:
+    #         - ${{ env.VERSION_INFO }}
+    #       ### 自定义发布信息
+    #       <details>
+
+    #       <summary>点击展开</summary>
           
-          ${{ env.CUSTOM_RELEASE_NOTES || 'None' }}
+    #       ${{ env.CUSTOM_RELEASE_NOTES || 'None' }}
 
-          </details>
+    #       </details>
 
     - name: Print disk usage 4
       if: always()
